@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Lista de Facturas</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="invoices" class="mat-elevation-z8 mat-cell">
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="">Acci&oacute;n</th>
+        <td mat-cell *matCellDef="let invoice">
+          <button mat-icon-button="Mostrar" (click)="show(invoice)">
+            <mat-icon svgIcon="page-layout-body"></mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Fecha</th>
+        <td mat-cell *matCellDef="let invoice">{{invoice.date}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="signature">
+        <th mat-header-cell *matHeaderCellDef>Firma</th>
+        <td mat-cell *matCellDef="let invoice">{{invoice.signature}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button="Adicionar" (click)="add()" class="mat-button-invoice">
+      <mat-icon svgIcon="plus"></mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+

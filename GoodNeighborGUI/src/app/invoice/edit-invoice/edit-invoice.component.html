@@ -1,0 +1,74 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Editar Factura</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Fecha:</mat-label>
+        <input matInput type="text" formControlName="date" autocomplete="off" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Firma:</mat-label>
+        <input matInput type="text" formControlName="signature" autocomplete="off" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Del Tipo:</mat-label>
+        <select matNativeControl formControlName="type" required>
+          <option *ngFor="let type of types" [ngValue]="type"
+                  [selected]="isTypeSelect(type)">{{type.type}}
+          </option>
+        </select>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Del Contacto:</mat-label>
+        <select matNativeControl formControlName="contact" required>
+          <option *ngFor="let contact of contacts" [ngValue]="contact"
+                  [selected]="isContactSelect(contact)">{{contact.name}}
+          </option>
+        </select>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>De la actividad:</mat-label>
+        <select matNativeControl formControlName="activity" required>
+          <option *ngFor="let activity of activities" [ngValue]="activity"
+                  [selected]="isActivitySelect(activity)">{{activity.name}}
+          </option>
+        </select>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Del Empleado:</mat-label>
+        <select matNativeControl formControlName="employee" required>
+          <option *ngFor="let employee of employees" [ngValue]="employee"
+                  [selected]="isEmployeeSelect(employee)">{{employee.name}}
+          </option>
+        </select>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Del Cliente:</mat-label>
+        <select matNativeControl formControlName="client" required>
+          <option *ngFor="let client of clients" [ngValue]="client"
+                  [selected]="isClientSelect(client)">{{client.enterpriseName}}
+          </option>
+        </select>
+      </mat-form-field>
+      <br>
+      <mat-card-actions>
+        <button mat-raised-button title="Actualizar">
+          <mat-icon svgIcon="update"></mat-icon>
+        </button>
+        <button mat-raised-button title="Cancelar" (click)="cancel()">
+          <mat-icon svgIcon="cancel"></mat-icon>
+        </button>
+      </mat-card-actions>
+      <input formControlName="id" style="visibility: hidden">
+    </form>
+  </mat-card-content>
+</mat-card>
+

@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Lista de Ordenes-Taller</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="orderWorkshops" class="mat-elevation-z8 mat-cell">
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="">Acci&oacute;n</th>
+        <td mat-cell *matCellDef="let orderWorkshop">
+          <button mat-icon-button="Mostrar" (click)="show(orderWorkshop)">
+            <mat-icon svgIcon="page-layout-body"></mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateOrder">
+        <th mat-header-cell *matHeaderCellDef>Fecha de la orden</th>
+        <td mat-cell *matCellDef="let orderWorkshop">{{orderWorkshop.dateOrder}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateEntrance">
+        <th mat-header-cell *matHeaderCellDef>Fecha de entrada</th>
+        <td mat-cell *matCellDef="let orderWorkshop">{{orderWorkshop.dateEntrance}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateExit">
+        <th mat-header-cell *matHeaderCellDef>Fecha de salida</th>
+        <td mat-cell *matCellDef="let orderWorkshop">{{orderWorkshop.dateExit}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let orderWorkshop">{{orderWorkshop.type}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let orderWorkshop">{{orderWorkshop.state}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button="Adicionar" (click)="add()" class="mat-button-orderworkshop">
+      <mat-icon svgIcon="plus"></mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
