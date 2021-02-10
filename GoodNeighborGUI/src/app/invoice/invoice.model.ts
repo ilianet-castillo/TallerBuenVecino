@@ -14,4 +14,5 @@ export class Invoice {
   activity: Activity;
   employee: Employee;
   client: Client;
+
 }

@@ -22,10 +22,11 @@ public class EntityContact {
     private String name;
     private String address;
     private String email;
-    private int phone;
+    private String phone;
     private String tcp;
-    private int nit;
-    private int accountNumber;
+    private String nit;
+    private String accountNumberCUP;
+    private String accountNumberCUC;
 
     // remove from here
 
@@ -62,11 +63,11 @@ public class EntityContact {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -78,19 +79,28 @@ public class EntityContact {
         this.tcp = tcp;
     }
 
-    public int getNit() {
+    public String getNit() {
         return nit;
     }
 
-    public void setNit(int nit) {
+    public void setNit(String nit) {
         this.nit = nit;
     }
 
-    public int getAccountNumber() {
-        return accountNumber;
+    public String getAccountNumberCUP() {
+        return accountNumberCUP;
     }
 
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setAccountNumberCUP(String accountNumberCUP) {
+        this.accountNumberCUP = accountNumberCUP;
     }
+
+    public String getAccountNumberCUC() {
+        return accountNumberCUC;
+    }
+
+    public void setAccountNumberCUC(String accountNumberCUC) {
+        this.accountNumberCUC = accountNumberCUC;
+    }
+
 }

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Contact} from '../../contact/contact.model';
+import {Component, OnInit} from '@angular/core';
 import {Coin} from '../coin.model';
 import {CoinService} from '../coin.service';
 
@@ -12,11 +11,13 @@ export class ListCoinComponent implements OnInit {
   displayedColumns: string[] = ['action', 'name', 'acronym'];
   coins: Coin[];
 
-  constructor(private coinService: CoinService) { }
+  constructor(private coinService: CoinService) {
+  }
 
-  ngOnInit(): void {this.coinService.requestList().toPromise().then(value => {
-    this.coins = (value as Coin[]);
-  }).catch(reason => alert(reason));
+  ngOnInit(): void {
+    this.coinService.requestList().toPromise().then(value => {
+      this.coins = (value as Coin[]);
+    }).catch(reason => alert(reason));
   }
 
   add(): void {

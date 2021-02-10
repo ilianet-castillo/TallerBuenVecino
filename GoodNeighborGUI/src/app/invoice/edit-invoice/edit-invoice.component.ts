@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Type} from '../../type/type.model';
 import {Contact} from '../../contact/contact.model';

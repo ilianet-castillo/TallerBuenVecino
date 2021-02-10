@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Invoice} from '../invoice.model';
 import {InvoiceService} from '../invoice.service';
 
@@ -10,7 +10,9 @@ import {InvoiceService} from '../invoice.service';
 export class ListInvoiceComponent implements OnInit {
   displayedColumns: string[] = ['action', 'date', 'signature'];
   invoices: Invoice[];
-  constructor(private invoiceService: InvoiceService) { }
+
+  constructor(private invoiceService: InvoiceService) {
+  }
 
   ngOnInit(): void {
     this.invoiceService.requestList().toPromise().then(value => {

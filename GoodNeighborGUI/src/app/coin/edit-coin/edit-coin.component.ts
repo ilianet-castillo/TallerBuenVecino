@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {CoinService} from '../coin.service';
 
@@ -10,7 +10,8 @@ import {CoinService} from '../coin.service';
 export class EditCoinComponent implements OnInit {
   editForm: FormGroup;
 
-  constructor(private coinService: CoinService) { }
+  constructor(private coinService: CoinService) {
+  }
 
   ngOnInit(): void {
     this.editForm = this.coinService.getForm();

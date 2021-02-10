@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ListCoinComponent } from './list-coin.component';
+import {ListCoinComponent} from './list-coin.component';
 
 describe('ListCoinComponent', () => {
   let component: ListCoinComponent;
@@ -8,9 +8,9 @@ describe('ListCoinComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListCoinComponent ]
+      declarations: [ListCoinComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ShowPositionComponent } from './show-position.component';
+import {ShowPositionComponent} from './show-position.component';
 
 describe('ShowPositionComponent', () => {
   let component: ShowPositionComponent;
@@ -8,9 +8,9 @@ describe('ShowPositionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShowPositionComponent ]
+      declarations: [ShowPositionComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

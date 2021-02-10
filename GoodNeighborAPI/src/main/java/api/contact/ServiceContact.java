@@ -24,8 +24,8 @@ public class ServiceContact {
 
     public Optional<EntityContact> update(int id, EntityContact contact) {
         return getForId(id).map(record -> {
-
-            record.setAccountNumber(contact.getAccountNumber());
+            record.setAccountNumberCUC(contact.getAccountNumberCUC());
+            record.setAccountNumberCUP(contact.getAccountNumberCUP());
             record.setAddress(contact.getAddress());
             record.setEmail(contact.getEmail());
             record.setName(contact.getName());

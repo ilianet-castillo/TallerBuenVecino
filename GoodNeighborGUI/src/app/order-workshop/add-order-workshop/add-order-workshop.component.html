@@ -6,14 +6,16 @@
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
       <mat-form-field>
         <mat-label>Fecha de la orden:</mat-label>
-        <input matInput [matDatepicker]="pickerDateOrder" [max]="getDate()" formControlName="dateOrder" readonly required>
+        <input matInput [matDatepicker]="pickerDateOrder" [max]="getDate()" formControlName="dateOrder" readonly
+               required>
         <mat-datepicker-toggle matSuffix [for]="pickerDateOrder"></mat-datepicker-toggle>
         <mat-datepicker #pickerDateOrder></mat-datepicker>
       </mat-form-field>
       <br>
       <mat-form-field>
         <mat-label>Fecha de entrada:</mat-label>
-        <input matInput [matDatepicker]="pickerDateEntrance" [max]="getDate()" formControlName="dateEntrance" readonly required>
+        <input matInput [matDatepicker]="pickerDateEntrance" [max]="getDate()" formControlName="dateEntrance" readonly
+               required>
         <mat-datepicker-toggle matSuffix [for]="pickerDateEntrance"></mat-datepicker-toggle>
         <mat-datepicker #pickerDateEntrance></mat-datepicker>
       </mat-form-field>

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Position} from '../../position/position.model';
 import {ClientService} from '../client.service';
 import {Employee} from '../../employee/employee.model';
-import {Province} from '../../province/province.model';
 
 @Component({
   selector: 'app-edit-client',
@@ -13,6 +12,7 @@ import {Province} from '../../province/province.model';
 export class EditClientComponent implements OnInit {
   editForm: FormGroup;
   positions: Position[];
+
   constructor(private clientService: ClientService) {
     this.clientService.getPosition().toPromise().then(value => {
       this.positions = (value as Position[]).sort((a, b) => a.name > b.name ? 1 : -1);

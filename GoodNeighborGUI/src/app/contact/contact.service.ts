@@ -23,10 +23,11 @@ export class ContactService {
       name: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.minLength(8), Validators.maxLength(8)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.minLength(10), Validators.maxLength(10)]],
       tcp: ['', Validators.required],
-      nit: ['', Validators.required],
-      accountNumber: ['', Validators.required]
+      nit: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.minLength(11), Validators.maxLength(11)]],
+      accountNumberCUP: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.minLength(16), Validators.maxLength(16)]],
+      accountNumberCUC: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.minLength(16), Validators.maxLength(16)]],
     });
   }
 

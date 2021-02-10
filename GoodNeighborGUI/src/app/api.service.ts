@@ -41,4 +41,8 @@ export class ApiService {
   sendPutRequest(url: string, objeto: any): Observable<any> {
     return this.httpClient.put(this.SERVER_URL + url + objeto.id, objeto).pipe(catchError(this.handleError));
   }
+
+  sendRequestPDF(url: string, id: string): Observable<any> {
+    return this.httpClient.get(this.SERVER_URL + url + 'pdf/' + id, {responseType: 'blob'}).pipe(catchError(this.handleError));
+  }
 }

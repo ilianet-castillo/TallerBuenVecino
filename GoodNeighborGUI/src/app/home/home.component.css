@@ -43,31 +43,37 @@
   color: white;
   font-family: Algerian;
 }
+
 .mat-button-client {
   background-color: aliceblue;
   color: black;
   font-family: Algerian;
 }
+
 .mat-button-activity {
   background-color: cadetblue;
   color: black;
   font-family: Algerian;
 }
+
 .mat-button-invoice {
   background-color: burlywood;
   color: black;
   font-family: Algerian;
 }
+
 .mat-button-description {
   background-color: chartreuse;
   color: black;
   font-family: Algerian;
 }
+
 .mat-button-vehicule {
   background-color: darkgreen;
   color: white;
   font-family: Algerian;
 }
+
 .mat-button-orderworkshop {
   background-color: black;
   color: white;

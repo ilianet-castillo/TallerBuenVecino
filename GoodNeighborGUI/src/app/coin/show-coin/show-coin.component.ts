@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CoinService} from '../coin.service';
 import {Coin} from '../coin.model';
-import {Type} from '../../type/type.model';
 
 @Component({
   selector: 'app-show-coin',
@@ -9,8 +8,10 @@ import {Type} from '../../type/type.model';
   styleUrls: ['./show-coin.component.css']
 })
 export class ShowCoinComponent implements OnInit {
-coin: Coin;
-  constructor(private coinService: CoinService) { }
+  coin: Coin;
+
+  constructor(private coinService: CoinService) {
+  }
 
   ngOnInit(): void {
     this.coinService.requestGet().toPromise().then(value => {

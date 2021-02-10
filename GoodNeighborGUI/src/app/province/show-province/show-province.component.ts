@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Province} from '../province.model';
 import {ProvinceService} from '../province.service';
 import {Position} from '../../position/position.model';
@@ -9,9 +9,10 @@ import {Position} from '../../position/position.model';
   styleUrls: ['./show-province.component.css']
 })
 export class ShowProvinceComponent implements OnInit {
-province: Province;
+  province: Province;
 
-  constructor(private provinceService: ProvinceService) { }
+  constructor(private provinceService: ProvinceService) {
+  }
 
   ngOnInit(): void {
     this.provinceService.requestGet().toPromise().then(value => {

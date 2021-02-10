@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {PositionService} from '../position.service';
 
@@ -9,7 +9,9 @@ import {PositionService} from '../position.service';
 })
 export class AddPositionComponent implements OnInit {
   addForm: FormGroup;
-  constructor(private positionService: PositionService) { }
+
+  constructor(private positionService: PositionService) {
+  }
 
   ngOnInit(): void {
     this.addForm = this.positionService.getForm();

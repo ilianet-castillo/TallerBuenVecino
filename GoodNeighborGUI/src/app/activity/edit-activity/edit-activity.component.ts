@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Client} from '../../client/client.model';
 import {Coin} from '../../coin/coin.model';

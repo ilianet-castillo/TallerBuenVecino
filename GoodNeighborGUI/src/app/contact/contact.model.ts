@@ -4,9 +4,10 @@ export class Contact {
   name: string;
   address: string;
   email: string;
-  phone: number;
+  phone: string;
   tcp: string;
-  nit: number;
-  accountNumber: number;
+  nit: string;
+  accountNumberCUP: string;
+  accountNumberCUC: string;
 
 }

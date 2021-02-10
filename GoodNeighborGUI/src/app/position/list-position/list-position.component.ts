@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Coin} from '../../coin/coin.model';
 import {PositionService} from '../position.service';
 
@@ -10,12 +10,14 @@ import {PositionService} from '../position.service';
 export class ListPositionComponent implements OnInit {
   displayedColumns: string[] = ['action', 'name'];
   positions: Position[];
-  constructor(private positionService: PositionService) { }
+
+  constructor(private positionService: PositionService) {
+  }
 
   ngOnInit(): void {
     this.positionService.requestList().toPromise().then(value => {
-    this.positions = (value as Position[]);
-  }).catch(reason => alert(reason));
+      this.positions = (value as Position[]);
+    }).catch(reason => alert(reason));
   }
 
   add(): void {

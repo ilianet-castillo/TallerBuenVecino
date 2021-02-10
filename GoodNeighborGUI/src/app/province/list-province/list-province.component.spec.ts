@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ListProvinceComponent } from './list-province.component';
+import {ListProvinceComponent} from './list-province.component';
 
 describe('ListProvinceComponent', () => {
   let component: ListProvinceComponent;
@@ -8,9 +8,9 @@ describe('ListProvinceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListProvinceComponent ]
+      declarations: [ListProvinceComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

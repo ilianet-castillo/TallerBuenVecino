@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {OrderWorkshopService} from '../order-workshop.service';
 import {Employee} from '../../employee/employee.model';
@@ -27,6 +27,7 @@ export class AddOrderWorkshopComponent implements OnInit {
   onSubmit() {
     this.orderWorkshopService.requestAdd(this.addForm);
   }
+
   getDate(): Date {
     return this.orderWorkshopService.getDate();
   }

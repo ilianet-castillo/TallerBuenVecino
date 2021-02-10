@@ -17,7 +17,8 @@ export class AppComponent {
       .addSvgIcon('cancel', this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/cancel.svg'))
       .addSvgIcon('pencil', this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/pencil.svg'))
       .addSvgIcon('check', this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/check.svg'))
-      .addSvgIcon('update', this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/update.svg'));
+      .addSvgIcon('update', this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/update.svg'))
+      .addSvgIcon('note', this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/icons/note.svg'));
   }
 
 }

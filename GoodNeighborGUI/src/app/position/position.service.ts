@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApiService} from '../api.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -10,7 +10,10 @@ import {Position} from './position.model';
 })
 export class PositionService {
   url = 'position/';
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) { }
+
+  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) {
+  }
+
   getForm(): FormGroup {
     return this.formBuilder.group({
       id: [''],

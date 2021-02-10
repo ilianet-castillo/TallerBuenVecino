@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Activity} from '../activity.model';
 import {ActivityService} from '../activity.service';
-import {Employee} from '../../employee/employee.model';
 
 @Component({
   selector: 'app-show-activity',
@@ -9,12 +8,15 @@ import {Employee} from '../../employee/employee.model';
   styleUrls: ['./show-activity.component.css']
 })
 export class ShowActivityComponent implements OnInit {
-activity: Activity;
-  constructor(private activityService: ActivityService) { }
+  activity: Activity;
 
-  ngOnInit(): void { this.activityService.requestGet().toPromise().then(value => {
-    this.activity = value as Activity;
-  }).catch(reason => alert(reason));
+  constructor(private activityService: ActivityService) {
+  }
+
+  ngOnInit(): void {
+    this.activityService.requestGet().toPromise().then(value => {
+      this.activity = value as Activity;
+    }).catch(reason => alert(reason));
   }
 
   edit(): void {

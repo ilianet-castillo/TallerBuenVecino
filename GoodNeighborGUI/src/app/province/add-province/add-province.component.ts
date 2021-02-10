@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {ProvinceService} from '../province.service';
 
@@ -9,7 +9,9 @@ import {ProvinceService} from '../province.service';
 })
 export class AddProvinceComponent implements OnInit {
   addForm: FormGroup;
-  constructor(private provinceService: ProvinceService) { }
+
+  constructor(private provinceService: ProvinceService) {
+  }
 
   ngOnInit(): void {
     this.addForm = this.provinceService.getForm();

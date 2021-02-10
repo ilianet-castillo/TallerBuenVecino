@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApiService} from '../api.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {PositionService} from '../position/position.service';
-import {ProvinceService} from '../province/province.service';
 import {ClientService} from '../client/client.service';
 import {CoinService} from '../coin/coin.service';
 import {Observable} from 'rxjs';
@@ -20,7 +18,8 @@ export class ActivityService {
               private formBuilder: FormBuilder,
               private router: Router,
               private clientService: ClientService,
-              private coinService: CoinService) { }
+              private coinService: CoinService) {
+  }
 
   getForm(): FormGroup {
     return this.formBuilder.group({

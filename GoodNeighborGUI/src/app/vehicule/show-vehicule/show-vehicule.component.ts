@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Vehicule} from '../vehicule.model';
 import {VehiculeService} from '../vehicule.service';
 
@@ -8,9 +8,10 @@ import {VehiculeService} from '../vehicule.service';
   styleUrls: ['./show-vehicule.component.css']
 })
 export class ShowVehiculeComponent implements OnInit {
-vehicule: Vehicule;
+  vehicule: Vehicule;
 
-  constructor(private vehiculeService: VehiculeService) { }
+  constructor(private vehiculeService: VehiculeService) {
+  }
 
   ngOnInit(): void {
     this.vehiculeService.requestGet().toPromise().then(value => {

@@ -1,9 +1,13 @@
 package api.invoice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @RestController
@@ -44,4 +48,15 @@ public class RestControllerInvoice {
     public List<EntityInvoice> showListInvoice() {
         return serviceInvoice.listAll();
     }
+
+    @GetMapping(path = {"pdf/{id}"}, produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> getInvoicePDF(@PathVariable int id) {
+        ByteArrayInputStream byteArrayInputStream = serviceInvoice.getInvoicePDF(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=invoice.pdf");
+
+        return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(byteArrayInputStream));
+    }
+
 }

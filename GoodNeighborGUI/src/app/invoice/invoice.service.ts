@@ -9,6 +9,7 @@ import {EmployeeService} from '../employee/employee.service';
 import {ClientService} from '../client/client.service';
 import {Observable} from 'rxjs';
 import {Invoice} from './invoice.model';
+import {saveAs} from '../../../node_modules/file-saver';
 
 @Injectable({
   providedIn: 'root'
@@ -106,6 +107,14 @@ export class InvoiceService {
     window.localStorage.removeItem('invoiceId');
     window.localStorage.setItem('invoiceId', invoice.id.toString());
     this.router.navigate(['edit-invoice']);
+  }
+
+  getInvoicePDF(invoiceId: number): void {
+    const mediaType = 'application/pdf';
+    this.apiService.sendRequestPDF(this.url, invoiceId.toString()).toPromise().then(value => {
+      const blob = new Blob([value], {type: mediaType});
+      saveAs(blob, 'Factura de servicio.pdf');
+    }).catch(reason => alert(reason));
   }
 
   getType(): Observable<any> {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OrderWorkshop} from '../order-workshop.model';
 import {OrderWorkshopService} from '../order-workshop.service';
 
@@ -11,7 +11,8 @@ export class ListOrderWorkshopComponent implements OnInit {
   displayedColumns: string[] = ['action', 'dateOrder', 'dateEntrance', 'dateExit', 'type', 'state'];
   orderWorkshops: OrderWorkshop[];
 
-  constructor(private orderWorkshopService: OrderWorkshopService) { }
+  constructor(private orderWorkshopService: OrderWorkshopService) {
+  }
 
   ngOnInit(): void {
     this.orderWorkshopService.requestList().toPromise().then(value => {

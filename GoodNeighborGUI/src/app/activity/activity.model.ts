@@ -12,10 +12,4 @@ export class Activity {
   coin: Coin;
 
 
-
-
-
-
-
-
 }
