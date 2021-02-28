@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from '../employee.service';
-import {Employee} from '../employee.model';
+import {EmployeeModel} from '../employee.model';
 
 @Component({
   selector: 'app-list-employee',
@@ -8,15 +8,16 @@ import {Employee} from '../employee.model';
   styleUrls: ['./list-employee.component.css']
 })
 export class ListEmployeeComponent implements OnInit {
+
   displayedColumns: string[] = ['action', 'name', 'phone', 'email'];
-  employees: Employee[];
+  employees: EmployeeModel[];
 
   constructor(private employeeService: EmployeeService) {
   }
 
   ngOnInit(): void {
     this.employeeService.requestList().toPromise().then(value => {
-      this.employees = (value as Employee[]);
+      this.employees = (value as EmployeeModel[]);
     }).catch(reason => alert(reason));
   }
 
@@ -24,7 +25,7 @@ export class ListEmployeeComponent implements OnInit {
     this.employeeService.add();
   }
 
-  show(employee: Employee): void {
+  show(employee: EmployeeModel): void {
     this.employeeService.show(employee);
   }
 

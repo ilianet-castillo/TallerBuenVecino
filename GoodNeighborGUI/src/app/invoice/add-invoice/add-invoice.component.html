@@ -1,65 +1,108 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Adicionar Factura</mat-card-title>
+    <mat-card-title>Crear Factura</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
       <mat-form-field>
-        <mat-label>Fecha:</mat-label>
-        <input matInput [matDatepicker]="picker" [max]="getDate()" formControlName="date" readonly required>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Firma:</mat-label>
-        <input matInput type="text" formControlName="signature" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-
-      <mat-form-field>
         <mat-label>Del Tipo:</mat-label>
-        <select matNativeControl formControlName="type" required>
-          <option *ngFor="let type of types" [ngValue]="type">
-            {{type.type}}
-          </option>
+        <select matNativeControl formControlName="invoiceType" required>
+          <option *ngFor="let type of types" [ngValue]="type">{{type.type}}</option>
         </select>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <mat-label>Del Contacto:</mat-label>
+        <mat-label>Contacto del taller:</mat-label>
         <select matNativeControl formControlName="contact" required>
-          <option *ngFor="let contact of contacts" [ngValue]="contact">
-            {{contact.name}}
-          </option>
+          <option *ngFor="let contact of contacts" [ngValue]="contact">{{contact.name}}</option>
         </select>
       </mat-form-field>
       <br>
       <mat-form-field>
-        <mat-label>De la Actividad:</mat-label>
-        <select matNativeControl formControlName="activity" required>
-          <option *ngFor="let activity of activitys" [ngValue]="activity">
-            {{activity.name}}
-          </option>
-        </select>
+        <mat-label>Nombre de la actividad:</mat-label>
+        <input matInput type="text" formControlName="activityName" autocomplete="off" required>
       </mat-form-field>
       <br>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Del Cliente:</mat-label>
+            <select matNativeControl formControlName="activityClient" required>
+              <option *ngFor="let client of clients" [ngValue]="client" (click)="getVehicles(client)">
+                {{client.enterpriseName}}
+              </option>
+            </select>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Del Veh&iacute;culo:</mat-label>
+            <select matNativeControl formControlName="activityVehicle" required>
+              <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle">{{vehicle.sheet}}</option>
+            </select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>N&uacute;mero de Factura:</mat-label>
+            <input matInput type="text" formControlName="activityNuInvoice" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Referencia OT No:</mat-label>
+            <input matInput type="text" formControlName="activityNuReferenceOt" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>No. Factura OT No:</mat-label>
+            <input matInput type="text" formControlName="activityReferenceOt" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Fecha Actividad :</mat-label>
+            <input matInput [matDatepicker]="picker" [max]="getDate()" formControlName="activityDate" readonly required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Moneda:</mat-label>
+            <select matNativeControl formControlName="activityCoin" required>
+              <option *ngFor="let coin of coins" [ngValue]="coin">{{coin.name}}</option>
+            </select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Empleado que entrega:</mat-label>
+            <select matNativeControl formControlName="employeeInvoice" required>
+              <option *ngFor="let employee of employees" [ngValue]="employee">{{employee.name}}</option>
+            </select>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Empleado que recibe:</mat-label>
+            <select matNativeControl formControlName="employeeReceive" required>
+              <option *ngFor="let employee of employees" [ngValue]="employee">{{employee.name}}</option>
+            </select>
+          </mat-form-field>
+        </div>
+      </div>
       <mat-form-field>
-        <mat-label>Del Empleado:</mat-label>
-        <select matNativeControl formControlName="employee" required>
-          <option *ngFor="let employee of employees" [ngValue]="employee">
-            {{employee.name}}
-          </option>
-        </select>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Del Cliente:</mat-label>
-        <select matNativeControl formControlName="client" required>
-          <option *ngFor="let client of clients" [ngValue]="client">
-            {{client.enterpriseName}}
-          </option>
-        </select>
+        <mat-label>Fecha:</mat-label>
+        <input matInput [matDatepicker]="datePicker" [max]="getDate()" formControlName="date" readonly required>
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
       </mat-form-field>
       <br>
       <mat-card-actions>

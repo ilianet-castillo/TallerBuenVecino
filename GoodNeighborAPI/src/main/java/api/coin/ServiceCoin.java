@@ -10,8 +10,8 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ServiceCoin {
-    @Autowired
 
+    @Autowired
     private RepositoryCoin repositoryCoin;
 
     public EntityCoin save(EntityCoin coin) {
@@ -24,8 +24,8 @@ public class ServiceCoin {
 
     public Optional<EntityCoin> update(int id, EntityCoin coin) {
         return getForId(id).map(record -> {
-            record.setAcronym(coin.getAcronym());
             record.setName(coin.getName());
+            record.setAcronym(coin.getAcronym());
             return save(record);
 
         });
@@ -41,4 +41,5 @@ public class ServiceCoin {
     public List<EntityCoin> listAll() {
         return repositoryCoin.findAll();
     }
+
 }

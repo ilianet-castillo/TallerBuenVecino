@@ -3,45 +3,62 @@
     <mat-card-title>Contacto</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-form-field>
-      <mat-label>Nombre:</mat-label>
-      <input matInput disabled value="{{contact?.name}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Direci&oacute;n:</mat-label>
-      <input matInput disabled value="{{contact?.address}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>E-mail:</mat-label>
-      <input matInput disabled value="{{contact?.email}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Tel&eacute;fono:</mat-label>
-      <input matInput disabled value="{{contact?.phone}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Tcp:</mat-label>
-      <input matInput disabled value="{{contact?.tcp}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Nit:</mat-label>
-      <input matInput disabled value="{{contact?.nit}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>N&uacute;mero de la cuenta CUP:</mat-label>
-      <input matInput disabled value="{{contact?.accountNumberCUP}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>N&uacute;mero de la cuenta CUC:</mat-label>
-      <input matInput disabled value="{{contact?.accountNumberCUC}}">
-    </mat-form-field>
+    <div class="container">
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Nombre:</mat-label>
+          <input matInput disabled value="{{contact?.name}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Direci&oacute;n:</mat-label>
+          <input matInput disabled value="{{contact?.address}}">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="container">
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>E-mail:</mat-label>
+          <input matInput disabled value="{{contact?.email}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Tel&eacute;fono:</mat-label>
+          <input matInput disabled value="{{contact?.phone}}">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="container">
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Tcp:</mat-label>
+          <input matInput disabled value="{{contact?.tcp}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Nit:</mat-label>
+          <input matInput disabled value="{{contact?.nit}}">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="container">
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>N&uacute;mero de la cuenta CUP:</mat-label>
+          <input matInput disabled value="{{contact?.accountNumberCUP}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>N&uacute;mero de la cuenta CUC:</mat-label>
+          <input matInput disabled value="{{contact?.accountNumberCUC}}">
+        </mat-form-field>
+      </div>
+    </div>
     <br>
     <mat-card-actions>
       <button mat-icon-button title="Editar" (click)="edit()">

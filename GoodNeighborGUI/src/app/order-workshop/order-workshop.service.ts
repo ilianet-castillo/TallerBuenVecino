@@ -4,7 +4,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {EmployeeService} from '../employee/employee.service';
 import {Observable} from 'rxjs';
-import {OrderWorkshop} from './order-workshop.model';
+import {OrderWorkshopModel} from './order-workshop.model';
+import {OrderWorkshopStateService} from '../order-workshop-state/order-workshop-state.service';
+import {OrderWorkshopTypeService} from '../order-workshop-type/order-workshop-type.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,8 @@ export class OrderWorkshopService {
   constructor(private apiService: ApiService,
               private formBuilder: FormBuilder,
               private router: Router,
+              private orderWorkshopStateService: OrderWorkshopStateService,
+              private orderWorkshopTypeService: OrderWorkshopTypeService,
               private employeeService: EmployeeService) {
   }
 
@@ -25,8 +29,8 @@ export class OrderWorkshopService {
       dateOrder: ['', Validators.required],
       dateEntrance: ['', Validators.required],
       dateExit: ['', Validators.required],
-      type: ['', Validators.required],
-      state: ['', Validators.required],
+      orderWorkshopState: ['', Validators.required],
+      orderWorkshopType: ['', Validators.required],
       employee: ['', Validators.required],
     });
   }
@@ -46,9 +50,9 @@ export class OrderWorkshopService {
       return;
     }
 
-    if (confirm('¿Desea adicionar la orden del taller ' + (addForm.value as OrderWorkshop).dateOrder + '?')) {
+    if (confirm('¿Desea adicionar la orden del taller ' + (addForm.value as OrderWorkshopModel).dateOrder + '?')) {
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Orden del taller' + (value as OrderWorkshop).dateOrder + 'Adicionado satisfactoriamente');
+        alert('Orden del taller' + (value as OrderWorkshopModel).dateOrder + 'Adicionado satisfactoriamente');
         this.list();
       }).catch(reason => alert(reason));
 
@@ -72,9 +76,9 @@ export class OrderWorkshopService {
       return;
     }
 
-    if (confirm('¿Desea actualizar la ordel del taller ' + (editForm.value as OrderWorkshop).dateOrder + '?')) {
+    if (confirm('¿Desea actualizar la ordel del taller ' + (editForm.value as OrderWorkshopModel).dateOrder + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Orden del taller ' + (value as OrderWorkshop).dateOrder + 'actualizada satisfactoriamente');
+        alert('Orden del taller ' + (value as OrderWorkshopModel).dateOrder + 'actualizada satisfactoriamente');
         this.show(value);
       }).catch(reason => alert(reason));
     }
@@ -89,16 +93,24 @@ export class OrderWorkshopService {
     this.router.navigate(['add-order-workshop']);
   }
 
-  show(orderWorkshop: OrderWorkshop): void {
+  show(orderWorkshop: OrderWorkshopModel): void {
     window.localStorage.removeItem('orderWorkshopId');
     window.localStorage.setItem('orderWorkshopId', orderWorkshop.id.toString());
     this.router.navigate(['show-order-workshop']);
   }
 
-  edit(orderWorkshop: OrderWorkshop): void {
+  edit(orderWorkshop: OrderWorkshopModel): void {
     window.localStorage.removeItem('orderWorkshopId');
     window.localStorage.setItem('orderWorkshopId', orderWorkshop.id.toString());
     this.router.navigate(['edit-order-workshop']);
+  }
+
+  getOrderWorkshopState(): Observable<any> {
+    return this.orderWorkshopStateService.requestList();
+  }
+
+  getOrderWorkshopType(): Observable<any> {
+    return this.orderWorkshopTypeService.requestList();
   }
 
   getEmployee(): Observable<any> {

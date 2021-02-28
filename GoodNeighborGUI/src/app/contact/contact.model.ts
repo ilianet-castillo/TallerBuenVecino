@@ -1,13 +1,13 @@
-export class Contact {
+export class ContactModel {
 
   id: number;
   name: string;
   address: string;
   email: string;
-  phone: string;
+  phone: number;
   tcp: string;
-  nit: string;
-  accountNumberCUP: string;
-  accountNumberCUC: string;
+  nit: number;
+  accountNumberCUP: number;
+  accountNumberCUC: number;
 
 }

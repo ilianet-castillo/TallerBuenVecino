@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PositionService} from '../position.service';
-import {Position} from '../position.model';
+import {PositionModel} from '../position.model';
 
 @Component({
   selector: 'app-show-position',
@@ -9,14 +9,14 @@ import {Position} from '../position.model';
 })
 export class ShowPositionComponent implements OnInit {
 
-  position: Position;
+  position: PositionModel;
 
   constructor(private positionService: PositionService) {
   }
 
   ngOnInit(): void {
     this.positionService.requestGet().toPromise().then(value => {
-      this.position = value as Position;
+      this.position = value as PositionModel;
     }).catch(reason => alert(reason));
   }
 

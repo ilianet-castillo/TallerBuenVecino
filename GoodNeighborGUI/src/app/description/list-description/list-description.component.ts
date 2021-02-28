@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Description} from '../description.model';
+import {DescriptionModel} from '../description.model';
 import {DescriptionService} from '../description.service';
 
 @Component({
@@ -8,15 +8,16 @@ import {DescriptionService} from '../description.service';
   styleUrls: ['./list-description.component.css']
 })
 export class ListDescriptionComponent implements OnInit {
-  displayedColumns: string[] = ['action', 'no', 'workDescription', 'amount'];
-  descriptions: Description[];
+
+  displayedColumns: string[] = ['action', 'workDescription', 'amount'];
+  descriptions: DescriptionModel[];
 
   constructor(private descriptionService: DescriptionService) {
   }
 
   ngOnInit(): void {
     this.descriptionService.requestList().toPromise().then(value => {
-      this.descriptions = (value as Description[]);
+      this.descriptions = (value as DescriptionModel[]);
     }).catch(reason => alert(reason));
   }
 
@@ -24,7 +25,7 @@ export class ListDescriptionComponent implements OnInit {
     this.descriptionService.add();
   }
 
-  show(description: Description): void {
+  show(description: DescriptionModel): void {
     this.descriptionService.show(description);
   }
 

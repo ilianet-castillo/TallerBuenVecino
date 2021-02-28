@@ -8,6 +8,7 @@ import {ProvinceService} from '../province.service';
   styleUrls: ['./add-province.component.css']
 })
 export class AddProvinceComponent implements OnInit {
+
   addForm: FormGroup;
 
   constructor(private provinceService: ProvinceService) {
@@ -24,6 +25,5 @@ export class AddProvinceComponent implements OnInit {
   cancel(): void {
     this.provinceService.list();
   }
-
 
 }

@@ -2,30 +2,31 @@ import {Injectable} from '@angular/core';
 import {ApiService} from '../api.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {PositionService} from '../position/position.service';
 import {Observable} from 'rxjs';
-import {Client} from './client.model';
+import {ClientModel} from './client.model';
+import {EmployeeModel} from '../employee/employee.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
+
   url = 'client/';
 
   constructor(private apiService: ApiService,
               private formBuilder: FormBuilder,
-              private router: Router,
-              private positionService: PositionService) {
+              private router: Router) {
   }
 
   getForm(): FormGroup {
     return this.formBuilder.group({
+      jsonId: [''],
       id: [''],
       enterpriseName: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.minLength(8), Validators.maxLength(8)]],
-      comment: ['', Validators.required],
       address: ['', Validators.required],
-      position: ['', Validators.required]
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.minLength(10), Validators.maxLength(10)]],
+      comment: ['', Validators.required],
+      vehicles: ['']
     });
   }
 
@@ -36,13 +37,15 @@ export class ClientService {
 
   requestAdd(addForm: FormGroup): void {
     if (addForm.invalid) {
-      alert('Campos obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea adicionar el cliente ' + (addForm.value as Client).enterpriseName + '?')) {
+    if (confirm('¿Desea adicionar el cliente ' + (addForm.value as ClientModel).enterpriseName + '?')) {
+      (addForm.value as ClientModel).jsonId = Math.random();
+      (addForm.value as ClientModel).vehicles = [];
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Cliente' + (value as Client).enterpriseName + 'Adicionado satisfactoriamente');
+        alert('Cliente ' + (value as ClientModel).enterpriseName + ' adicionado satisfactoriamente');
         this.list();
       }).catch(reason => alert(reason));
 
@@ -62,13 +65,13 @@ export class ClientService {
 
   requestUpdate(editForm: FormGroup) {
     if (editForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea actualizar el cliente ' + (editForm.value as Client).enterpriseName + '?')) {
+    if (confirm('¿Desea actualizar el cliente ' + (editForm.value as ClientModel).enterpriseName + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Cliente ' + (value as Client).enterpriseName + 'actualizado satisfactoriamente');
+        alert('Cliente ' + (value as ClientModel).enterpriseName + ' actualizado satisfactoriamente');
         this.show(value);
       }).catch(reason => alert(reason));
     }
@@ -83,21 +86,16 @@ export class ClientService {
     this.router.navigate(['add-client']);
   }
 
-  show(client: Client): void {
+  show(client: ClientModel): void {
     window.localStorage.removeItem('clientId');
     window.localStorage.setItem('clientId', client.id.toString());
     this.router.navigate(['show-client']);
   }
 
-  edit(client: Client): void {
+  edit(client: ClientModel): void {
     window.localStorage.removeItem('clientId');
     window.localStorage.setItem('clientId', client.id.toString());
     this.router.navigate(['edit-client']);
   }
-
-  getPosition(): Observable<any> {
-    return this.positionService.requestList();
-  }
-
 
 }

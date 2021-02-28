@@ -1,106 +1,46 @@
 package api.contact;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Data
-@Table(name = "tbcontact")
+@Table(name = "tb_contact")
 public class EntityContact {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String address;
+
+    @Column(nullable = false)
     private String email;
-    private String phone;
+
+    @Column(nullable = false)
+    private long phone;
+
+    @Column(nullable = false)
     private String tcp;
-    private String nit;
-    private String accountNumberCUP;
-    private String accountNumberCUC;
 
-    // remove from here
+    @Column(nullable = false)
+    private long nit;
 
+    @Column(nullable = false)
+    private long accountNumberCUP;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getTcp() {
-        return tcp;
-    }
-
-    public void setTcp(String tcp) {
-        this.tcp = tcp;
-    }
-
-    public String getNit() {
-        return nit;
-    }
-
-    public void setNit(String nit) {
-        this.nit = nit;
-    }
-
-    public String getAccountNumberCUP() {
-        return accountNumberCUP;
-    }
-
-    public void setAccountNumberCUP(String accountNumberCUP) {
-        this.accountNumberCUP = accountNumberCUP;
-    }
-
-    public String getAccountNumberCUC() {
-        return accountNumberCUC;
-    }
-
-    public void setAccountNumberCUC(String accountNumberCUC) {
-        this.accountNumberCUC = accountNumberCUC;
-    }
+    @Column(nullable = false)
+    private long accountNumberCUC;
 
 }

@@ -4,8 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {InvoiceService} from '../invoice/invoice.service';
 import {Observable} from 'rxjs';
-import {Invoice} from '../invoice/invoice.model';
-import {Description} from './description.model';
+import {DescriptionModel} from './description.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +15,13 @@ export class DescriptionService {
 
   constructor(private apiService: ApiService,
               private formBuilder: FormBuilder,
-              private router: Router, private invoiceService: InvoiceService) {
+              private router: Router,
+              private invoiceService: InvoiceService) {
   }
 
   getForm(): FormGroup {
     return this.formBuilder.group({
       id: [''],
-      no: ['', Validators.required],
       workDescription: ['', Validators.required],
       amount: ['', Validators.required],
       invoice: ['', Validators.required]
@@ -36,13 +35,13 @@ export class DescriptionService {
 
   requestAdd(addForm: FormGroup): void {
     if (addForm.invalid) {
-      alert('Campos obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea adicionar la descripción ' + (addForm.value as Description).no + '?')) {
+    if (confirm('¿Desea adicionar la descripción ' + (addForm.value as DescriptionModel).workDescription + '?')) {
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Descripción' + (value as Description).no + 'Adicionada satisfactoriamente');
+        alert('Descripción ' + (value as DescriptionModel).workDescription + ' adicionada satisfactoriamente');
         this.list();
       }).catch(reason => alert(reason));
 
@@ -62,13 +61,13 @@ export class DescriptionService {
 
   requestUpdate(editForm: FormGroup) {
     if (editForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos Obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea actualizar la descripción ' + (editForm.value as Description).no + '?')) {
+    if (confirm('¿Desea actualizar la descripción ' + (editForm.value as DescriptionModel).workDescription + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Descripción' + (value as Invoice).date + 'actualizada satisfactoriamente');
+        alert('Descripción ' + (value as DescriptionModel).workDescription + ' actualizada satisfactoriamente');
         this.show(value);
       }).catch(reason => alert(reason));
     }
@@ -83,13 +82,13 @@ export class DescriptionService {
     this.router.navigate(['add-description']);
   }
 
-  show(description: Description): void {
+  show(description: DescriptionModel): void {
     window.localStorage.removeItem('descriptionId');
     window.localStorage.setItem('descriptionId', description.id.toString());
     this.router.navigate(['show-description']);
   }
 
-  edit(description: Description): void {
+  edit(description: DescriptionModel): void {
     window.localStorage.removeItem('descriptionId');
     window.localStorage.setItem('descriptionId', description.id.toString());
     this.router.navigate(['edit-description']);

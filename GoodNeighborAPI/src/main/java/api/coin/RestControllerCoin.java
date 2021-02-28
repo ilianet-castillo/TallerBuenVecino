@@ -35,7 +35,6 @@ public class RestControllerCoin {
 
     @DeleteMapping(path = "{id}")
     public ResponseEntity<EntityCoin> deleteCoin(@PathVariable int id) {
-
         return serviceCoin.delete(id)
                 .map(record -> ResponseEntity.ok(record))
                 .orElse(ResponseEntity.notFound().build());
@@ -45,4 +44,5 @@ public class RestControllerCoin {
     public List<EntityCoin> showListCoin() {
         return serviceCoin.listAll();
     }
+
 }

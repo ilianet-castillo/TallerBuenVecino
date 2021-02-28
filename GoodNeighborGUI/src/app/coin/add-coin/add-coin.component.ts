@@ -8,6 +8,7 @@ import {CoinService} from '../coin.service';
   styleUrls: ['./add-coin.component.css']
 })
 export class AddCoinComponent implements OnInit {
+
   addForm: FormGroup;
 
   constructor(private coinService: CoinService) {

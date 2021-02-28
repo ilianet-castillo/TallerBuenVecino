@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Contact} from '../contact.model';
+import {ContactModel} from '../contact.model';
 import {ContactService} from '../contact.service';
 
 @Component({
@@ -10,14 +10,14 @@ import {ContactService} from '../contact.service';
 export class ListContactComponent implements OnInit {
 
   displayedColumns: string[] = ['action', 'name', 'phone', 'email'];
-  contacts: Contact[];
+  contacts: ContactModel[];
 
   constructor(private contactService: ContactService) {
   }
 
   ngOnInit(): void {
     this.contactService.requestList().toPromise().then(value => {
-      this.contacts = (value as Contact[]);
+      this.contacts = (value as ContactModel[]);
     }).catch(reason => alert(reason));
   }
 
@@ -25,7 +25,7 @@ export class ListContactComponent implements OnInit {
     this.contactService.add();
   }
 
-  show(contact: Contact): void {
+  show(contact: ContactModel): void {
     this.contactService.show(contact);
   }
 

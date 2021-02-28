@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {Province} from '../../province/province.model';
+import {ProvinceModel} from '../../province/province.model';
 import {EmployeeService} from '../employee.service';
-import {Position} from '../../position/position.model';
-import {Employee} from '../employee.model';
+import {PositionModel} from '../../position/position.model';
+import {EmployeeModel} from '../employee.model';
 
 @Component({
   selector: 'app-edit-employee',
@@ -13,16 +13,16 @@ import {Employee} from '../employee.model';
 export class EditEmployeeComponent implements OnInit {
 
   editForm: FormGroup;
-  positions: Position[];
-  provinces: Province[];
+  provinces: ProvinceModel[];
+  positions: PositionModel[];
 
   constructor(private employeeService: EmployeeService) {
-    this.employeeService.getPosition().toPromise().then(value => {
-      this.positions = (value as Position[]).sort((a, b) => a.name > b.name ? 1 : -1);
+    this.employeeService.getProvince().toPromise().then(value => {
+      this.provinces = (value as ProvinceModel[]).sort((a, b) => a.name > b.name ? 1 : -1);
     }).catch(reason => alert(reason));
 
-    this.employeeService.getProvince().toPromise().then(value => {
-      this.provinces = (value as Province[]).sort((a, b) => a.name > b.name ? 1 : -1);
+    this.employeeService.getPosition().toPromise().then(value => {
+      this.positions = (value as PositionModel[]).sort((a, b) => a.name > b.name ? 1 : -1);
     }).catch(reason => alert(reason));
   }
 
@@ -41,12 +41,12 @@ export class EditEmployeeComponent implements OnInit {
     this.employeeService.show(this.editForm.value);
   }
 
-  isPositionSelect(position: Position): boolean {
-    return (this.editForm.value as Employee).position.id === position.id;
+  isProvinceSelect(province: ProvinceModel): boolean {
+    return (this.editForm.value as EmployeeModel).province.id === province.id;
   }
 
-  isProvinceSelect(province: Province): boolean {
-    return (this.editForm.value as Employee).province.id === province.id;
+  isPositionSelect(position: PositionModel): boolean {
+    return (this.editForm.value as EmployeeModel).position.id === position.id;
   }
 
 }

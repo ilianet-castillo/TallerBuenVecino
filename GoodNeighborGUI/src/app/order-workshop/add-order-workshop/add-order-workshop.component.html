@@ -4,49 +4,69 @@
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <mat-label>Fecha de la orden:</mat-label>
-        <input matInput [matDatepicker]="pickerDateOrder" [max]="getDate()" formControlName="dateOrder" readonly
-               required>
-        <mat-datepicker-toggle matSuffix [for]="pickerDateOrder"></mat-datepicker-toggle>
-        <mat-datepicker #pickerDateOrder></mat-datepicker>
-      </mat-form-field>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Fecha de la orden:</mat-label>
+            <input matInput [matDatepicker]="pickerDateOrder" [max]="getDate()" formControlName="dateOrder" readonly
+                   required>
+            <mat-datepicker-toggle matSuffix [for]="pickerDateOrder"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDateOrder></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Fecha de entrada:</mat-label>
+            <input matInput [matDatepicker]="pickerDateEntrance" [max]="getDate()" formControlName="dateEntrance"
+                   readonly
+                   required>
+            <mat-datepicker-toggle matSuffix [for]="pickerDateEntrance"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDateEntrance></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Fecha de salida:</mat-label>
+            <input matInput [matDatepicker]="pickerDateExit" [min]="getDate()" formControlName="dateExit" readonly
+                   required>
+            <mat-datepicker-toggle matSuffix [for]="pickerDateExit"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDateExit></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Estado:</mat-label>
+            <select matNativeControl formControlName="orderWorkshopState" required>
+              <option *ngFor="let orderWorkshopState of orderWorkshopStates" [ngValue]="orderWorkshopState">
+                {{orderWorkshopState.name}}
+              </option>
+            </select>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Tipo:</mat-label>
+            <select matNativeControl formControlName="orderWorkshopType" required>
+              <option *ngFor="let orderWorkshopType of orderWorkshopTypes" [ngValue]="orderWorkshopType">
+                {{orderWorkshopType.name}}
+              </option>
+            </select>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Del empleado:</mat-label>
+            <select matNativeControl formControlName="employee" required>
+              <option *ngFor="let employee of employees" [ngValue]="employee">
+                {{employee.name}}
+              </option>
+            </select>
+          </mat-form-field>
+        </div>
+      </div>
       <br>
-      <mat-form-field>
-        <mat-label>Fecha de entrada:</mat-label>
-        <input matInput [matDatepicker]="pickerDateEntrance" [max]="getDate()" formControlName="dateEntrance" readonly
-               required>
-        <mat-datepicker-toggle matSuffix [for]="pickerDateEntrance"></mat-datepicker-toggle>
-        <mat-datepicker #pickerDateEntrance></mat-datepicker>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Fecha de salida:</mat-label>
-        <input matInput [matDatepicker]="pickerDateExit" [max]="getDate()" formControlName="dateExit" readonly required>
-        <mat-datepicker-toggle matSuffix [for]="pickerDateExit"></mat-datepicker-toggle>
-        <mat-datepicker #pickerDateExit></mat-datepicker>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Tipo:</mat-label>
-        <input matInput type="text" formControlName="type" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Estado:</mat-label>
-        <input matInput type="text" formControlName="state" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Del empleado:</mat-label>
-        <select matNativeControl formControlName="employee" required>
-          <option *ngFor="let employee of employees" [ngValue]="employee">
-            {{employee.name}}
-          </option>
-        </select>
-      </mat-form-field>
-      <br>
-
       <mat-card-actions>
         <button mat-raised-button title="Crear">
           <mat-icon svgIcon="check"></mat-icon>

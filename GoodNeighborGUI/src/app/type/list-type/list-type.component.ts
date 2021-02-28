@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TypeService} from '../type.service';
-import {Type} from '../type.model';
+import {TypeModel} from '../type.model';
 
 @Component({
   selector: 'app-list-type',
@@ -10,14 +10,14 @@ import {Type} from '../type.model';
 export class ListTypeComponent implements OnInit {
 
   displayedColumns: string[] = ['action', 'type', 'title'];
-  types: Type[];
+  types: TypeModel[];
 
   constructor(private typeService: TypeService) {
   }
 
   ngOnInit(): void {
     this.typeService.requestList().toPromise().then(value => {
-      this.types = (value as Type[]);
+      this.types = (value as TypeModel[]);
     }).catch(reason => alert(reason));
   }
 
@@ -25,7 +25,7 @@ export class ListTypeComponent implements OnInit {
     this.typeService.add();
   }
 
-  show(type: Type): void {
+  show(type: TypeModel): void {
     this.typeService.show(type);
   }
 

@@ -1,28 +1,26 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Descripción</mat-card-title>
+    <mat-card-title>Descripci&oacute;n</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-form-field>
-      <mat-label>No:</mat-label>
-      <input matInput disabled value="{{description?.no}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Descripción de los trabajos realizados:</mat-label>
+      <mat-label>Descripci&oacute;n de los trabajos realizados:</mat-label>
       <input matInput disabled value="{{description?.workDescription}}">
     </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Importe:</mat-label>
-      <input matInput disabled value="{{description?.amount}}">
-    </mat-form-field>
-    <br>
-
-    <mat-form-field>
-      <mat-label>Factura:</mat-label>
-      <input matInput disabled value="{{description?.invoice?.date}}">
-    </mat-form-field>
+    <div class="container">
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Importe:</mat-label>
+          <input matInput disabled value="{{description?.amount}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Factura:</mat-label>
+          <input matInput disabled value="{{description?.invoice?.activityNuInvoice}}">
+        </mat-form-field>
+      </div>
+    </div>
     <br>
     <mat-card-actions>
       <button mat-icon-button title="Editar" (click)="edit()">
@@ -34,4 +32,3 @@
     </mat-card-actions>
   </mat-card-content>
 </mat-card>
-

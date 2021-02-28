@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Coin} from '../../coin/coin.model';
-import {Province} from '../province.model';
+import {CoinModel} from '../../coin/coin.model';
+import {ProvinceModel} from '../province.model';
 import {ProvinceService} from '../province.service';
 
 @Component({
@@ -9,15 +9,16 @@ import {ProvinceService} from '../province.service';
   styleUrls: ['./list-province.component.css']
 })
 export class ListProvinceComponent implements OnInit {
+
   displayedColumns: string[] = ['action', 'name'];
-  provinces: Province[];
+  provinces: ProvinceModel[];
 
   constructor(private provinceService: ProvinceService) {
   }
 
   ngOnInit(): void {
     this.provinceService.requestList().toPromise().then(value => {
-      this.provinces = (value as Province[]);
+      this.provinces = (value as ProvinceModel[]);
     }).catch(reason => alert(reason));
   }
 
@@ -25,7 +26,8 @@ export class ListProvinceComponent implements OnInit {
     this.provinceService.add();
   }
 
-  show(coin: Coin): void {
+  show(coin: CoinModel): void {
     this.provinceService.show(coin);
   }
+
 }

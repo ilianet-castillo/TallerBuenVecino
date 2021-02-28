@@ -44,4 +44,5 @@ public class RestControllerContact {
     public List<EntityContact> showListContact() {
         return serviceContact.listAll();
     }
+
 }

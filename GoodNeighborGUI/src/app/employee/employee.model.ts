@@ -1,15 +1,18 @@
-import {Position} from '../position/position.model';
-import {Province} from '../province/province.model';
+import {ProvinceModel} from '../province/province.model';
+import {PositionModel} from '../position/position.model';
+import {OrderWorkshopModel} from '../order-workshop/order-workshop.model';
 
-export class Employee {
+export class EmployeeModel {
 
+  jsonId: number;
   id: number;
   name: string;
   phone: number;
   identityNumber: number;
   email: string;
   address: string;
-  position: Position;
-  province: Province;
+  province: ProvinceModel;
+  position: PositionModel;
+  orderWorkshops: OrderWorkshopModel[];
 
 }

@@ -39,4 +39,5 @@ public class ServiceProvince {
     public List<EntityProvince> listAll() {
         return repositoryProvince.findAll();
     }
+
 }

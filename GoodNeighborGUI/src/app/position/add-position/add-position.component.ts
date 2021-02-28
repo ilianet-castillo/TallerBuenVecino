@@ -8,6 +8,7 @@ import {PositionService} from '../position.service';
   styleUrls: ['./add-position.component.css']
 })
 export class AddPositionComponent implements OnInit {
+
   addForm: FormGroup;
 
   constructor(private positionService: PositionService) {

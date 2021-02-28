@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {Type} from '../../type/type.model';
-import {Contact} from '../../contact/contact.model';
-import {Activity} from '../../activity/activity.model';
-import {Employee} from '../../employee/employee.model';
-import {Client} from '../../client/client.model';
+import {TypeModel} from '../../type/type.model';
+import {ContactModel} from '../../contact/contact.model';
+import {ClientModel} from '../../client/client.model';
+import {VehicleModel} from '../../vehicle/vehicle.model';
+import {CoinModel} from '../../coin/coin.model';
+import {EmployeeModel} from '../../employee/employee.model';
 import {InvoiceService} from '../invoice.service';
-import {Invoice} from '../invoice.model';
+import {InvoiceModel} from '../invoice.model';
 
 @Component({
   selector: 'app-edit-invoice',
@@ -16,34 +17,32 @@ import {Invoice} from '../invoice.model';
 export class EditInvoiceComponent implements OnInit {
 
   editForm: FormGroup;
-  types: Type[];
-  contacts: Contact[];
-  activities: Activity[];
-  employees: Employee[];
-  clients: Client[];
+  types: TypeModel[];
+  contacts: ContactModel[];
+  clients: ClientModel[];
+  vehicles: VehicleModel[];
+  coins: CoinModel[];
+  employees: EmployeeModel[];
 
   constructor(private invoiceService: InvoiceService) {
-
     this.invoiceService.getType().toPromise().then(value => {
-      this.types = (value as Type[]).sort((a, b) => a.type > b.type ? 1 : -1);
+      this.types = (value as TypeModel[]).sort((a, b) => a.type > b.type ? 1 : -1);
     }).catch(reason => alert(reason));
 
     this.invoiceService.getContact().toPromise().then(value => {
-      this.contacts = (value as Contact[]).sort((a, b) => a.name > b.name ? 1 : -1);
+      this.contacts = (value as ContactModel[]).sort((a, b) => a.name > b.name ? 1 : -1);
     }).catch(reason => alert(reason));
 
+    this.invoiceService.getClient().toPromise().then(value => {
+      this.clients = (value as ClientModel[]).sort((a, b) => a.enterpriseName > b.enterpriseName ? 1 : -1);
+    }).catch(reason => alert(reason));
 
-    this.invoiceService.getActivity().toPromise().then(value => {
-      this.activities = (value as Activity[]).sort((a, b) => a.name > b.name ? 1 : -1);
+    this.invoiceService.getCoin().toPromise().then(value => {
+      this.coins = (value as CoinModel[]).sort((a, b) => a.acronym > b.acronym ? 1 : -1);
     }).catch(reason => alert(reason));
 
     this.invoiceService.getEmployee().toPromise().then(value => {
-      this.employees = (value as Employee[]).sort((a, b) => a.name > b.name ? 1 : -1);
-    }).catch(reason => alert(reason));
-
-
-    this.invoiceService.getClient().toPromise().then(value => {
-      this.clients = (value as Client[]).sort((a, b) => a.enterpriseName > b.enterpriseName ? 1 : -1);
+      this.employees = (value as EmployeeModel[]).sort((a, b) => a.name > b.name ? 1 : -1);
     }).catch(reason => alert(reason));
   }
 
@@ -58,28 +57,44 @@ export class EditInvoiceComponent implements OnInit {
     this.invoiceService.requestUpdate(this.editForm);
   }
 
+  getDate(): Date {
+    return this.invoiceService.getDate();
+  }
+
+  getVehicles(client: ClientModel) {
+    this.vehicles = client.vehicles;
+  }
+
   cancel(): void {
     this.invoiceService.show(this.editForm.value);
   }
 
-  isTypeSelect(type: Type): boolean {
-    return (this.editForm.value as Invoice).type.id === type.id;
+  isTypeSelect(type: TypeModel): boolean {
+    return (this.editForm.value as InvoiceModel).invoiceType.id === type.id;
   }
 
-  isContactSelect(contact: Contact): boolean {
-    return (this.editForm.value as Invoice).contact.id === contact.id;
+  isContactSelect(contact: ContactModel): boolean {
+    return (this.editForm.value as InvoiceModel).contact.id === contact.id;
   }
 
-  isActivitySelect(activity: Activity): boolean {
-    return (this.editForm.value as Invoice).activity.id === activity.id;
+  isClientSelect(client: ClientModel): boolean {
+    return (this.editForm.value as InvoiceModel).activityClient.id === client.id;
   }
 
-  isEmployeeSelect(employee: Employee): boolean {
-    return (this.editForm.value as Invoice).employee.id === employee.id;
+  isVehicleSelect(vehicle: VehicleModel): boolean {
+    return (this.editForm.value as InvoiceModel).activityVehicle.id === vehicle.id;
   }
 
-  isClientSelect(client: Client): boolean {
-    return (this.editForm.value as Invoice).client.id === client.id;
+  isCoinSelect(coin: CoinModel): boolean {
+    return (this.editForm.value as InvoiceModel).activityCoin.id === coin.id;
+  }
+
+  isEmployeeInvoiceSelect(employee: EmployeeModel): boolean {
+    return (this.editForm.value as InvoiceModel).employeeInvoice.id === employee.id;
+  }
+
+  isEmployeeReceiveSelect(employee: EmployeeModel): boolean {
+    return (this.editForm.value as InvoiceModel).employeeReceive.id === employee.id;
   }
 
 }

@@ -1,17 +1,23 @@
 package api.invoice;
 
+import api.description.EntityDescription;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +26,12 @@ import java.util.Optional;
 public class ServiceInvoice {
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceInvoice.class);
+
+    @Value("classpath:img/header.png")
+    private Resource headerImg;
+
+    @Value("classpath:img/footer.png")
+    private Resource footerImg;
 
     @Autowired
     private RepositoryInvoice repositoryInvoice;
@@ -34,13 +46,19 @@ public class ServiceInvoice {
 
     public Optional<EntityInvoice> update(int id, EntityInvoice invoice) {
         return getForId(id).map(record -> {
-            record.setActivity(invoice.getActivity());
+            record.setInvoiceType(invoice.getInvoiceType());
             record.setContact(invoice.getContact());
+            record.setActivityName(invoice.getActivityName());
+            record.setActivityClient(invoice.getActivityClient());
+            record.setActivityVehicle(invoice.getActivityVehicle());
+            record.setActivityNuInvoice(invoice.getActivityNuInvoice());
+            record.setActivityReferenceOt(invoice.getActivityReferenceOt());
+            record.setActivityNuReferenceOt(invoice.getActivityNuReferenceOt());
+            record.setActivityDate(invoice.getActivityDate());
+            record.setActivityCoin(invoice.getActivityCoin());
+            record.setEmployeeInvoice(invoice.getEmployeeInvoice());
+            record.setEmployeeReceive(invoice.getEmployeeReceive());
             record.setDate(invoice.getDate());
-            record.setEmployee(invoice.getEmployee());
-            record.setSignature(invoice.getSignature());
-            record.setType(invoice.getType());
-            record.setClient(invoice.getClient());
             return save(record);
         });
     }
@@ -59,18 +77,19 @@ public class ServiceInvoice {
     public ByteArrayInputStream getInvoicePDF(int id) {
         EntityInvoice invoice = getForId(id).get();
 
-        Document document = new Document();
+        Document document = new Document(PageSize.LETTER, 48f, 48f, 102f, 81);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         try {
-            PdfWriter.getInstance(document, out);
+            PdfWriter writer = PdfWriter.getInstance(document, out);
+            writer.setPageEvent(new HeaderFooterPageEvent(headerImg, footerImg));
             document.open();
 
             Paragraph element;
             element = new Paragraph();
             element.setAlignment(Element.ALIGN_CENTER);
             element.setFont(FontFactory.getFont(FontFactory.TIMES, 22));
-            element.add(invoice.getType().getTitle());
+            element.add(invoice.getInvoiceType().getTitle());
             document.add(element);
 
             element = new Paragraph();
@@ -79,7 +98,7 @@ public class ServiceInvoice {
             element.add(" ");
             document.add(element);
 
-            PdfPTable table = new PdfPTable(4);
+            PdfPTable table = new PdfPTable(new float[]{10, 40, 15, 35});
             table.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.setWidthPercentage(100);
 
@@ -119,7 +138,7 @@ public class ServiceInvoice {
             cell.setBorder(0);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(invoice.getContact().getNit(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getContact().getNit()), FontFactory.getFont(FontFactory.TIMES, 9)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             cell.setBorder(0);
             table.addCell(cell);
@@ -139,7 +158,7 @@ public class ServiceInvoice {
             cell.setBorder(0);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(invoice.getContact().getAccountNumberCUP(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getContact().getAccountNumberCUP()), FontFactory.getFont(FontFactory.TIMES, 9)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             cell.setBorder(0);
             table.addCell(cell);
@@ -149,7 +168,7 @@ public class ServiceInvoice {
             cell.setBorder(0);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(invoice.getContact().getPhone(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getContact().getPhone()), FontFactory.getFont(FontFactory.TIMES, 9)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             cell.setBorder(0);
             table.addCell(cell);
@@ -159,7 +178,7 @@ public class ServiceInvoice {
             cell.setBorder(0);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(invoice.getContact().getAccountNumberCUC(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getContact().getAccountNumberCUC()), FontFactory.getFont(FontFactory.TIMES, 9)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             cell.setBorder(0);
             table.addCell(cell);
@@ -174,130 +193,304 @@ public class ServiceInvoice {
             element = new Paragraph();
             element.setAlignment(Element.ALIGN_CENTER);
             element.add(new Phrase("Nombre de la Actividad: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 11)));
-            element.add(new Phrase(invoice.getActivity().getName(), FontFactory.getFont(FontFactory.TIMES, 11)));
+            element.add(new Phrase(invoice.getActivityName(), FontFactory.getFont(FontFactory.TIMES, 11)));
             document.add(element);
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_LEFT);
-//            element.add(new Phrase("Nombre: ", FontFactory.getFont(FontFactory.TIMES_BOLD)));
-//            element.add(new Phrase(invoice.getFecha().toString().substring(0, 10), FontFactory.getFont(FontFactory.TIMES)));
-//            document.add(element);
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_LEFT);
-//            element.add(new Phrase("Lugar: ", FontFactory.getFont(FontFactory.TIMES_BOLD)));
-//            element.add(new Phrase(activoAlumno.getLugar(), FontFactory.getFont(FontFactory.TIMES)));
-//            document.add(element);
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_LEFT);
-//            element.add(new Phrase("Hora: ", FontFactory.getFont(FontFactory.TIMES_BOLD)));
-//            element.add(new Phrase(activoAlumno.getHora().toString(), FontFactory.getFont(FontFactory.TIMES)));
-//            document.add(element);
-//
-//            element = new Paragraph();
-//            element.add(" ");
-//            document.add(element);
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_LEFT);
-//            element.setFont(FontFactory.getFont(FontFactory.TIMES_BOLD));
-//            element.add("Asistencia:");
-//            document.add(element);
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_LEFT);
-//            element.setFont(FontFactory.getFont(FontFactory.TIMES_BOLD));
-//            element.add("Profesores:");
-//            document.add(element);
-//
-//            for (EntidadProfesor profesor : activoAlumno.getProfesores()) {
-//                element = new Paragraph();
-//                element.setAlignment(Element.ALIGN_LEFT);
-//                element.setFont(FontFactory.getFont(FontFactory.TIMES));
-//                element.add("*" + profesor.getNombre() + " " + profesor.getApellidos() + " (" + profesor.getFacultad().getNombre() + ")");
-//                document.add(element);
-//            }
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_LEFT);
-//            element.setFont(FontFactory.getFont(FontFactory.TIMES_BOLD));
-//            element.add("Alumnos Ayudantes:");
-//            document.add(element);
-//
-//            int count = 1;
-//            for (EntidadEstudiante estudiante : activoAlumno.getEstudiantesPresentes()) {
-//                element = new Paragraph();
-//                element.setAlignment(Element.ALIGN_LEFT);
-//                element.setFont(FontFactory.getFont(FontFactory.TIMES));
-//                element.add(count++ + ". " + estudiante.getNombre() + " " + estudiante.getApellidos());
-//                document.add(element);
-//            }
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_LEFT);
-//            element.setFont(FontFactory.getFont(FontFactory.TIMES_BOLD));
-//            element.add("Ausentes:");
-//            document.add(element);
-//
-//            PdfPTable table = new PdfPTable(2);
-//            table.setWidthPercentage(100);
-//            PdfPCell cell;
-//            cell = new PdfPCell(new Phrase("Nombres y apellidos", FontFactory.getFont(FontFactory.TIMES_BOLD)));
-//            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-//            table.addCell(cell);
-//
-//            cell = new PdfPCell(new Phrase("Facultad", FontFactory.getFont(FontFactory.TIMES_BOLD)));
-//            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-//            table.addCell(cell);
-//
-//            for (EntidadEstudiante estudiante : activoAlumno.getEstudiantesAusentes()) {
-//                cell = new PdfPCell(new Phrase(estudiante.getNombre() + " " + estudiante.getApellidos(), FontFactory.getFont(FontFactory.TIMES)));
-//                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-//                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-//                table.addCell(cell);
-//
-//                cell = new PdfPCell(new Phrase(estudiante.getFacultad().getNombre(), FontFactory.getFont(FontFactory.TIMES)));
-//                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-//                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-//                table.addCell(cell);
-//            }
-//            document.add(table);
-//
-//            element = new Paragraph();
-//            element.add(" ");
-//            document.add(element);
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_LEFT);
-//            element.setFont(FontFactory.getFont(FontFactory.TIMES_BOLD));
-//            element.add("Consideraciones generales:");
-//            document.add(element);
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_JUSTIFIED);
-//            element.setFont(FontFactory.getFont(FontFactory.TIMES));
-//            element.add(activoAlumno.getConsideracionesGenerales());
-//            document.add(element);
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_LEFT);
-//            element.setFont(FontFactory.getFont(FontFactory.TIMES_BOLD));
-//            element.add("Planteamientos realizados por los estudiantes AA:");
-//            document.add(element);
-//
-//            element = new Paragraph();
-//            element.setAlignment(Element.ALIGN_JUSTIFIED);
-//            element.setFont(FontFactory.getFont(FontFactory.TIMES));
-//            element.add(activoAlumno.getPlanteamientosRealizados());
-//            document.add(element);
-//
+
+            element = new Paragraph();
+            element.setAlignment(Element.ALIGN_LEFT);
+            element.setFont(FontFactory.getFont(FontFactory.TIMES, 11));
+            element.add(" ");
+            document.add(element);
+
+            table = new PdfPTable(2);
+            table.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.setWidthPercentage(100);
+
+            cell = new PdfPCell(new Phrase("Datos del Cliente:", FontFactory.getFont(FontFactory.TIMES_BOLD, 10)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Del Servicio:", FontFactory.getFont(FontFactory.TIMES_BOLD, 10)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            document.add(table);
+
+            table = new PdfPTable(new float[]{10, 40, 16, 34});
+            table.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.setWidthPercentage(100);
+
+            cell = new PdfPCell(new Phrase("Nombre:", FontFactory.getFont(FontFactory.TIMES_BOLD, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(invoice.getActivityClient().getEnterpriseName(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("No. Factura:", FontFactory.getFont(FontFactory.TIMES_BOLD, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getActivityNuInvoice()), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Domicilio:", FontFactory.getFont(FontFactory.TIMES_BOLD, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(invoice.getActivityClient().getAddress(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Referencia OT No:", FontFactory.getFont(FontFactory.TIMES_BOLD, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getActivityReferenceOt()), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Teléfono:", FontFactory.getFont(FontFactory.TIMES_BOLD, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getActivityClient().getPhone()), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("No. Factura OT No:", FontFactory.getFont(FontFactory.TIMES_BOLD, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getActivityNuReferenceOt()), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Vehículo:", FontFactory.getFont(FontFactory.TIMES_BOLD, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(invoice.getActivityVehicle().getMarkModel(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Fecha:", FontFactory.getFont(FontFactory.TIMES_BOLD, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(invoice.getActivityDate().toString(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Chapa:", FontFactory.getFont(FontFactory.TIMES_BOLD, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(invoice.getActivityVehicle().getSheet(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Moneda:", FontFactory.getFont(FontFactory.TIMES_BOLD, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(invoice.getActivityCoin().getAcronym(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+            document.add(table);
+
+            element = new Paragraph();
+            element.setAlignment(Element.ALIGN_LEFT);
+            element.setFont(FontFactory.getFont(FontFactory.TIMES, 11));
+            element.add(" ");
+            document.add(element);
+
+            table = new PdfPTable(new float[]{5, 85, 10});
+            table.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.setWidthPercentage(100);
+
+            cell = new PdfPCell(new Phrase("No.", FontFactory.getFont(FontFactory.TIMES, 10)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Descripción de los trabajos realizado: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 10)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Importe:", FontFactory.getFont(FontFactory.TIMES_BOLD, 10)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            double total = 0;
+            for (int i = 0; i < invoice.getDescriptions().size(); i++) {
+                EntityDescription description = invoice.getDescriptions().get(i);
+
+                cell = new PdfPCell(new Phrase(String.valueOf(i + 1), FontFactory.getFont(FontFactory.TIMES, 10)));
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase(description.getWorkDescription(), FontFactory.getFont(FontFactory.TIMES, 10)));
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                table.addCell(cell);
+
+                cell = new PdfPCell(new Phrase(String.valueOf(description.getAmount()), FontFactory.getFont(FontFactory.TIMES, 10)));
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+
+                total += description.getAmount();
+            }
+            document.add(table);
+
+            table = new PdfPTable(new float[]{90, 10});
+            table.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.setWidthPercentage(100);
+
+            cell = new PdfPCell(new Phrase("TOTAL", FontFactory.getFont(FontFactory.TIMES, 10)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(String.valueOf(total), FontFactory.getFont(FontFactory.TIMES, 10)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(cell);
+            document.add(table);
+
+            element = new Paragraph();
+            element.setAlignment(Element.ALIGN_LEFT);
+            element.setFont(FontFactory.getFont(FontFactory.TIMES, 11));
+            element.add(" ");
+            document.add(element);
+
+            table = new PdfPTable(new float[]{15, 35, 15, 35});
+            table.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.setWidthPercentage(100);
+
+            cell = new PdfPCell(new Phrase("Facturado por: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(invoice.getEmployeeInvoice().getName(), FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Recibido por: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(invoice.getEmployeeReceive().getName(), FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Cargo: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(invoice.getEmployeeInvoice().getPosition().getName(), FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Cargo: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(invoice.getEmployeeReceive().getPosition().getName(), FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Fecha: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getDate()), FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Fecha: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getDate()), FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Firma: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("______________________________", FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Firma: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            cell.setBorder(0);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("______________________________", FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            cell.setBorder(0);
+            table.addCell(cell);
+            document.add(table);
+
             document.close();
         } catch (DocumentException ex) {
             logger.error("Error occurred: {0}", ex);
         }
 
         return new ByteArrayInputStream(out.toByteArray());
+    }
+
+    class HeaderFooterPageEvent extends PdfPageEventHelper {
+
+        private Resource headerImg;
+
+        private Resource footerImg;
+
+        public HeaderFooterPageEvent(Resource headerImg, Resource footerImg) {
+            this.headerImg = headerImg;
+            this.footerImg = footerImg;
+        }
+
+        @Override
+        public void onStartPage(PdfWriter writer, Document document) {
+            try {
+                Image image = Image.getInstance(headerImg.getURL());
+                image.setAlignment(Element.ALIGN_CENTER);
+                image.setAbsolutePosition(0, document.top());
+                image.scalePercent(24f);
+                writer.getDirectContent().addImage(image);
+            } catch (IOException | DocumentException e) {
+                System.err.println(e);
+            }
+        }
+
+        @Override
+        public void onEndPage(PdfWriter writer, Document document) {
+            try {
+                Image image = Image.getInstance(footerImg.getURL());
+                image.setAlignment(Element.ALIGN_CENTER);
+                image.setAbsolutePosition(0, 0);
+                image.scalePercent(24f);
+                writer.getDirectContent().addImage(image);
+            } catch (IOException | DocumentException e) {
+                System.err.println(e);
+            }
+        }
+
     }
 
 }

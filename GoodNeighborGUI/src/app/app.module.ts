@@ -43,12 +43,8 @@ import {ListClientComponent} from './client/list-client/list-client.component';
 import {AddClientComponent} from './client/add-client/add-client.component';
 import {ShowClientComponent} from './client/show-client/show-client.component';
 import {EditClientComponent} from './client/edit-client/edit-client.component';
-import {ListActivityComponent} from './activity/list-activity/list-activity.component';
-import {AddActivityComponent} from './activity/add-activity/add-activity.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import {ShowActivityComponent} from './activity/show-activity/show-activity.component';
-import {EditActivityComponent} from './activity/edit-activity/edit-activity.component';
 import {ListInvoiceComponent} from './invoice/list-invoice/list-invoice.component';
 import {AddInvoiceComponent} from './invoice/add-invoice/add-invoice.component';
 import {ShowInvoiceComponent} from './invoice/show-invoice/show-invoice.component';
@@ -57,14 +53,23 @@ import {ListDescriptionComponent} from './description/list-description/list-desc
 import {AddDescriptionComponent} from './description/add-description/add-description.component';
 import {ShowDescriptionComponent} from './description/show-description/show-description.component';
 import {EditDescriptionComponent} from './description/edit-description/edit-description.component';
-import {ListVehiculeComponent} from './vehicule/list-vehicule/list-vehicule.component';
-import {AddVehiculeComponent} from './vehicule/add-vehicule/add-vehicule.component';
-import {ShowVehiculeComponent} from './vehicule/show-vehicule/show-vehicule.component';
-import {EditVehiculeComponent} from './vehicule/edit-vehicule/edit-vehicule.component';
+import {ListVehicleComponent} from './vehicle/list-vehicle/list-vehicle.component';
+import {AddVehicleComponent} from './vehicle/add-vehicle/add-vehicle.component';
+import {ShowVehicleComponent} from './vehicle/show-vehicle/show-vehicle.component';
+import {EditVehicleComponent} from './vehicle/edit-vehicle/edit-vehicle.component';
 import {ListOrderWorkshopComponent} from './order-workshop/list-order-workshop/list-order-workshop.component';
 import {AddOrderWorkshopComponent} from './order-workshop/add-order-workshop/add-order-workshop.component';
 import {ShowOrderWorkshopComponent} from './order-workshop/show-order-workshop/show-order-workshop.component';
 import {EditOrderWorkshopComponent} from './order-workshop/edit-order-workshop/edit-order-workshop.component';
+import {AddOrderWorkshopStateComponent} from './order-workshop-state/add-order-workshop-state/add-order-workshop-state.component';
+import {EditOrderWorkshopStateComponent} from './order-workshop-state/edit-order-workshop-state/edit-order-workshop-state.component';
+import {ListOrderWorkshopStateComponent} from './order-workshop-state/list-order-workshop-state/list-order-workshop-state.component';
+import {ShowOrderWorkshopStateComponent} from './order-workshop-state/show-order-workshop-state/show-order-workshop-state.component';
+import {AddOrderWorkshopTypeComponent} from './order-workshop-type/add-order-workshop-type/add-order-workshop-type.component';
+import {EditOrderWorkshopTypeComponent} from './order-workshop-type/edit-order-workshop-type/edit-order-workshop-type.component';
+import {ListOrderWorkshopTypeComponent} from './order-workshop-type/list-order-workshop-type/list-order-workshop-type.component';
+import {ShowOrderWorkshopTypeComponent} from './order-workshop-type/show-order-workshop-type/show-order-workshop-type.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -98,10 +103,6 @@ import {EditOrderWorkshopComponent} from './order-workshop/edit-order-workshop/e
     AddClientComponent,
     ShowClientComponent,
     EditClientComponent,
-    ListActivityComponent,
-    AddActivityComponent,
-    ShowActivityComponent,
-    EditActivityComponent,
     ListInvoiceComponent,
     AddInvoiceComponent,
     ShowInvoiceComponent,
@@ -110,14 +111,23 @@ import {EditOrderWorkshopComponent} from './order-workshop/edit-order-workshop/e
     AddDescriptionComponent,
     ShowDescriptionComponent,
     EditDescriptionComponent,
-    ListVehiculeComponent,
-    AddVehiculeComponent,
-    ShowVehiculeComponent,
-    EditVehiculeComponent,
+    ListVehicleComponent,
+    AddVehicleComponent,
+    ShowVehicleComponent,
+    EditVehicleComponent,
     ListOrderWorkshopComponent,
     AddOrderWorkshopComponent,
     ShowOrderWorkshopComponent,
-    EditOrderWorkshopComponent
+    EditOrderWorkshopComponent,
+    AddOrderWorkshopStateComponent,
+    EditOrderWorkshopStateComponent,
+    ListOrderWorkshopStateComponent,
+    ShowOrderWorkshopStateComponent,
+    AddOrderWorkshopTypeComponent,
+    EditOrderWorkshopTypeComponent,
+    ListOrderWorkshopTypeComponent,
+    ShowOrderWorkshopTypeComponent,
+    AddVehicleComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +144,8 @@ import {EditOrderWorkshopComponent} from './order-workshop/edit-order-workshop/e
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

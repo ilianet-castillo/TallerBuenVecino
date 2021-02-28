@@ -3,14 +3,14 @@ import {ApiService} from '../api.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {Type} from './type.model';
+import {TypeModel} from './type.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TypeService {
 
-  url = 'type/';
+  url = 'invoice_type/';
 
   constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) {
   }
@@ -30,12 +30,12 @@ export class TypeService {
 
   requestAdd(addForm: FormGroup): void {
     if (addForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
-    if (confirm('¿Desea adicionar el tipo ' + (addForm.value as Type).type + '?')) {
+    if (confirm('¿Desea adicionar el tipo de factura ' + (addForm.value as TypeModel).type + '?')) {
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Tipo' + (value as Type).type + 'Adicionado satisfactoriamente');
+        alert('Tipo de factura ' + (value as TypeModel).type + ' adicionado satisfactoriamente');
         this.list();
       }).catch(reason => alert(reason));
 
@@ -55,13 +55,13 @@ export class TypeService {
 
   requestUpdate(editForm: FormGroup) {
     if (editForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea actualizar el tipo' + (editForm.value as Type).title + '?')) {
+    if (confirm('¿Desea actualizar el tipo de factura ' + (editForm.value as TypeModel).title + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Type' + (value as Type).title + 'actualizado satisfactoriamente');
+        alert('Tipo factura ' + (value as TypeModel).title + ' actualizado satisfactoriamente');
         this.show(value);
       }).catch(reason => alert(reason));
     }
@@ -76,13 +76,13 @@ export class TypeService {
     this.router.navigate(['add-type']);
   }
 
-  show(type: Type): void {
+  show(type: TypeModel): void {
     window.localStorage.removeItem('typeId');
     window.localStorage.setItem('typeId', type.id.toString());
     this.router.navigate(['show-type']);
   }
 
-  edit(type: Type): void {
+  edit(type: TypeModel): void {
     window.localStorage.removeItem('typeId');
     window.localStorage.setItem('typeId', type.id.toString());
     this.router.navigate(['edit-type']);

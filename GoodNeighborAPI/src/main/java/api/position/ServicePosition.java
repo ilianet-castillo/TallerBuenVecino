@@ -10,6 +10,7 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ServicePosition {
+
     @Autowired
     private RepositoryPosition repositoryPosition;
 
@@ -38,5 +39,6 @@ public class ServicePosition {
     public List<EntityPosition> listAll() {
         return repositoryPosition.findAll();
     }
+
 }
 

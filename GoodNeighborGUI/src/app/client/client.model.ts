@@ -1,10 +1,13 @@
-import {Position} from '../position/position.model';
+import {VehicleModel} from '../vehicle/vehicle.model';
 
-export class Client {
+export class ClientModel {
+
+  jsonId: number;
   id: number;
   enterpriseName: string;
+  address: string;
   phone: number;
   comment: string;
-  address: string;
-  position: Position;
+  vehicles: VehicleModel[];
+
 }

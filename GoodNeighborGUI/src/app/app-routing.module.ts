@@ -29,10 +29,6 @@ import {ListClientComponent} from './client/list-client/list-client.component';
 import {AddClientComponent} from './client/add-client/add-client.component';
 import {ShowClientComponent} from './client/show-client/show-client.component';
 import {EditClientComponent} from './client/edit-client/edit-client.component';
-import {ListActivityComponent} from './activity/list-activity/list-activity.component';
-import {AddActivityComponent} from './activity/add-activity/add-activity.component';
-import {ShowActivityComponent} from './activity/show-activity/show-activity.component';
-import {EditActivityComponent} from './activity/edit-activity/edit-activity.component';
 import {ListInvoiceComponent} from './invoice/list-invoice/list-invoice.component';
 import {AddInvoiceComponent} from './invoice/add-invoice/add-invoice.component';
 import {ShowInvoiceComponent} from './invoice/show-invoice/show-invoice.component';
@@ -41,15 +37,22 @@ import {ListDescriptionComponent} from './description/list-description/list-desc
 import {AddDescriptionComponent} from './description/add-description/add-description.component';
 import {ShowDescriptionComponent} from './description/show-description/show-description.component';
 import {EditDescriptionComponent} from './description/edit-description/edit-description.component';
-import {ListVehiculeComponent} from './vehicule/list-vehicule/list-vehicule.component';
-import {AddVehiculeComponent} from './vehicule/add-vehicule/add-vehicule.component';
-import {ShowVehiculeComponent} from './vehicule/show-vehicule/show-vehicule.component';
-import {EditVehiculeComponent} from './vehicule/edit-vehicule/edit-vehicule.component';
+import {ListVehicleComponent} from './vehicle/list-vehicle/list-vehicle.component';
+import {AddVehicleComponent} from './vehicle/add-vehicle/add-vehicle.component';
+import {ShowVehicleComponent} from './vehicle/show-vehicle/show-vehicle.component';
+import {EditVehicleComponent} from './vehicle/edit-vehicle/edit-vehicle.component';
 import {ListOrderWorkshopComponent} from './order-workshop/list-order-workshop/list-order-workshop.component';
 import {AddOrderWorkshopComponent} from './order-workshop/add-order-workshop/add-order-workshop.component';
 import {ShowOrderWorkshopComponent} from './order-workshop/show-order-workshop/show-order-workshop.component';
 import {EditOrderWorkshopComponent} from './order-workshop/edit-order-workshop/edit-order-workshop.component';
-
+import {ListOrderWorkshopStateComponent} from './order-workshop-state/list-order-workshop-state/list-order-workshop-state.component';
+import {AddOrderWorkshopStateComponent} from './order-workshop-state/add-order-workshop-state/add-order-workshop-state.component';
+import {ShowOrderWorkshopStateComponent} from './order-workshop-state/show-order-workshop-state/show-order-workshop-state.component';
+import {EditOrderWorkshopStateComponent} from './order-workshop-state/edit-order-workshop-state/edit-order-workshop-state.component';
+import {EditOrderWorkshopTypeComponent} from './order-workshop-type/edit-order-workshop-type/edit-order-workshop-type.component';
+import {ListOrderWorkshopTypeComponent} from './order-workshop-type/list-order-workshop-type/list-order-workshop-type.component';
+import {AddOrderWorkshopTypeComponent} from './order-workshop-type/add-order-workshop-type/add-order-workshop-type.component';
+import {ShowOrderWorkshopTypeComponent} from './order-workshop-type/show-order-workshop-type/show-order-workshop-type.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -82,10 +85,6 @@ const routes: Routes = [
   {path: 'add-client', component: AddClientComponent},
   {path: 'show-client', component: ShowClientComponent},
   {path: 'edit-client', component: EditClientComponent},
-  {path: 'list-activity', component: ListActivityComponent},
-  {path: 'add-activity', component: AddActivityComponent},
-  {path: 'show-activity', component: ShowActivityComponent},
-  {path: 'edit-activity', component: EditActivityComponent},
   {path: 'list-invoice', component: ListInvoiceComponent},
   {path: 'add-invoice', component: AddInvoiceComponent},
   {path: 'show-invoice', component: ShowInvoiceComponent},
@@ -94,14 +93,22 @@ const routes: Routes = [
   {path: 'add-description', component: AddDescriptionComponent},
   {path: 'show-description', component: ShowDescriptionComponent},
   {path: 'edit-description', component: EditDescriptionComponent},
-  {path: 'list-vehicule', component: ListVehiculeComponent},
-  {path: 'add-vehicule', component: AddVehiculeComponent},
-  {path: 'show-vehicule', component: ShowVehiculeComponent},
-  {path: 'edit-vehicule', component: EditVehiculeComponent},
+  {path: 'list-vehicle', component: ListVehicleComponent},
+  {path: 'add-vehicle', component: AddVehicleComponent},
+  {path: 'show-vehicle', component: ShowVehicleComponent},
+  {path: 'edit-vehicle', component: EditVehicleComponent},
   {path: 'list-order-workshop', component: ListOrderWorkshopComponent},
   {path: 'add-order-workshop', component: AddOrderWorkshopComponent},
   {path: 'show-order-workshop', component: ShowOrderWorkshopComponent},
-  {path: 'edit-order-workshop', component: EditOrderWorkshopComponent}
+  {path: 'edit-order-workshop', component: EditOrderWorkshopComponent},
+  {path: 'list-order-workshop-state', component: ListOrderWorkshopStateComponent},
+  {path: 'add-order-workshop-state', component: AddOrderWorkshopStateComponent},
+  {path: 'show-order-workshop-state', component: ShowOrderWorkshopStateComponent},
+  {path: 'edit-order-workshop-state', component: EditOrderWorkshopStateComponent},
+  {path: 'list-order-workshop-type', component: ListOrderWorkshopTypeComponent},
+  {path: 'add-order-workshop-type', component: AddOrderWorkshopTypeComponent},
+  {path: 'show-order-workshop-type', component: ShowOrderWorkshopTypeComponent},
+  {path: 'edit-order-workshop-type', component: EditOrderWorkshopTypeComponent}
 ];
 
 @NgModule({

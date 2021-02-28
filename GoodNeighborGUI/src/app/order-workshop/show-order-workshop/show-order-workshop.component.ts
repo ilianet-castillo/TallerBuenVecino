@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderWorkshop} from '../order-workshop.model';
+import {OrderWorkshopModel} from '../order-workshop.model';
 import {OrderWorkshopService} from '../order-workshop.service';
 
 @Component({
@@ -8,14 +8,15 @@ import {OrderWorkshopService} from '../order-workshop.service';
   styleUrls: ['./show-order-workshop.component.css']
 })
 export class ShowOrderWorkshopComponent implements OnInit {
-  orderWorkshop: OrderWorkshop;
+
+  orderWorkshop: OrderWorkshopModel;
 
   constructor(private orderWorkshopService: OrderWorkshopService) {
   }
 
   ngOnInit(): void {
     this.orderWorkshopService.requestGet().toPromise().then(value => {
-      this.orderWorkshop = value as OrderWorkshop;
+      this.orderWorkshop = value as OrderWorkshopModel;
     }).catch(reason => alert(reason));
   }
 

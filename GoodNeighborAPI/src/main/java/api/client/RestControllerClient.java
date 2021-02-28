@@ -36,15 +36,14 @@ public class RestControllerClient {
 
     @DeleteMapping(path = "{id}")
     public ResponseEntity<EntityClient> deleteClient(@PathVariable int id) {
-
         return serviceClient.delete(id)
                 .map(record -> ResponseEntity.ok(record))
                 .orElse(ResponseEntity.notFound().build());
-
     }
 
     @GetMapping
     public List<EntityClient> showListClient() {
         return serviceClient.listAll();
     }
+
 }

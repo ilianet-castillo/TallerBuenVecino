@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Invoice} from '../invoice.model';
+import {InvoiceModel} from '../invoice.model';
 import {InvoiceService} from '../invoice.service';
 
 @Component({
@@ -8,14 +8,14 @@ import {InvoiceService} from '../invoice.service';
   styleUrls: ['./show-invoice.component.css']
 })
 export class ShowInvoiceComponent implements OnInit {
-  invoice: Invoice;
+  invoice: InvoiceModel;
 
   constructor(private invoiceService: InvoiceService) {
   }
 
   ngOnInit(): void {
     this.invoiceService.requestGet().toPromise().then(value => {
-      this.invoice = value as Invoice;
+      this.invoice = value as InvoiceModel;
     }).catch(reason => alert(reason));
   }
 

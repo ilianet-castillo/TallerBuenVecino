@@ -4,46 +4,62 @@
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <mat-label>Nombre:</mat-label>
-        <input matInput type="text" formControlName="name" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Direción:</mat-label>
-        <input matInput type="text" formControlName="address" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>E-mail:</mat-label>
-        <input matInput type="text" formControlName="email" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Teléfono:</mat-label>
-        <input matInput type="text" formControlName="phone" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>TCP:</mat-label>
-        <input matInput type="text" formControlName="tcp" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Nit:</mat-label>
-        <input matInput type="text" formControlName="nit" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Número de la cuenta CUP:</mat-label>
-        <input matInput type="text" formControlName="accountNumberCUP" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Número de la cuenta CUC:</mat-label>
-        <input matInput type="text" formControlName="accountNumberCUC" autocomplete="off" required>
-      </mat-form-field>
-      <br>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Nombre:</mat-label>
+            <input matInput type="text" formControlName="name" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Direción:</mat-label>
+            <input matInput type="text" formControlName="address" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>E-mail:</mat-label>
+            <input matInput type="text" formControlName="email" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Teléfono:</mat-label>
+            <input matInput type="text" formControlName="phone" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>TCP:</mat-label>
+            <input matInput type="text" formControlName="tcp" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Nit:</mat-label>
+            <input matInput type="text" formControlName="nit" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Número de la cuenta CUP:</mat-label>
+            <input matInput type="text" formControlName="accountNumberCUP" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Número de la cuenta CUC:</mat-label>
+            <input matInput type="text" formControlName="accountNumberCUC" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+      </div>
       <mat-card-actions>
         <button mat-raised-button title="Crear">
           <mat-icon svgIcon="check"></mat-icon>

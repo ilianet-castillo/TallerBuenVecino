@@ -1,4 +1,5 @@
-export class Province {
+export class ProvinceModel {
+
   id: number;
   name: string;
 

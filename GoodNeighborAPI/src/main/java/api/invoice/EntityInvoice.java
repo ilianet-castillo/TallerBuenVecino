@@ -1,125 +1,83 @@
 package api.invoice;
 
-import api.activity.EntityActivity;
 import api.client.EntityClient;
+import api.coin.EntityCoin;
 import api.contact.EntityContact;
+import api.description.EntityDescription;
 import api.employee.EntityEmployee;
-import api.type.EntityType;
+import api.invoicetype.EntityInvoiceType;
+import api.vehicle.EntityVehicle;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@JsonIdentityInfo(property = "jsonId", generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = EntityInvoice.class)
 @Entity
-@Table(name = "tbinvoice")
+@Table(name = "tb_invoice")
 public class EntityInvoice {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private Date date;
+    @ManyToOne
+    @JoinColumn(name = "invoice_type_id", nullable = false)
+    private EntityInvoiceType invoiceType;
 
-    private String signature;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tbtypeid", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private EntityType type;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tbcontactd", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne
+    @JoinColumn(name = "contact_id", nullable = false)
     private EntityContact contact;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tbemployeid", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private EntityEmployee employee;
+    @Column(nullable = false)
+    private String activityName;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tbactivityid", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private EntityActivity activity;
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private EntityClient activityClient;
 
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    private EntityVehicle activityVehicle;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tbclientid", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private EntityClient client;
+    @Column(nullable = false)
+    private long activityNuInvoice;
 
+    @Column(nullable = false)
+    private long activityReferenceOt;
 
-    // delete from here
+    @Column(nullable = false)
+    private long activityNuReferenceOt;
 
+    @Column(nullable = false)
+    private Date activityDate;
 
-    public int getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "coin_id", nullable = false)
+    private EntityCoin activityCoin;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
+    private List<EntityDescription> descriptions;
 
-    public Date getDate() {
-        return date;
-    }
+    @ManyToOne
+    @JoinColumn(name = "employee_invoice_id", nullable = false)
+    private EntityEmployee employeeInvoice;
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    @ManyToOne
+    @JoinColumn(name = "employee_receive_id", nullable = false)
+    private EntityEmployee employeeReceive;
 
-    public String getSignature() {
-        return signature;
-    }
+    @Column(nullable = false)
+    private Date date;
 
-    public void setSignature(String signature) {
-        this.signature = signature;
-    }
-
-    public EntityType getType() {
-        return type;
-    }
-
-    public void setType(EntityType type) {
-        this.type = type;
-    }
-
-    public EntityContact getContact() {
-        return contact;
-    }
-
-    public void setContact(EntityContact contact) {
-        this.contact = contact;
-    }
-
-    public EntityEmployee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(EntityEmployee employee) {
-        this.employee = employee;
-    }
-
-    public EntityActivity getActivity() {
-        return activity;
-    }
-
-    public void setActivity(EntityActivity activity) {
-        this.activity = activity;
-    }
-
-    public EntityClient getClient() {
-        return client;
-    }
-
-    public void setClient(EntityClient client) {
-        this.client = client;
-    }
 }

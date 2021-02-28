@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Lista de Vehículos</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="vehicles" class="mat-elevation-z8 mat-cell">
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="">Acci&oacute;n</th>
+        <td mat-cell *matCellDef="let vehicle">
+          <button mat-icon-button="Mostrar" (click)="show(vehicle)">
+            <mat-icon svgIcon="page-layout-body"></mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="markModel">
+        <th mat-header-cell *matHeaderCellDef>Marca-Modelo</th>
+        <td mat-cell *matCellDef="let vehicle">{{vehicle.markModel}}</td>
+      </ng-container>
+      <ng-container matColumnDef="sheet">
+        <th mat-header-cell *matHeaderCellDef>Chapa</th>
+        <td mat-cell *matCellDef="let vehicle">{{vehicle.sheet}}</td>
+      </ng-container>
+      <ng-container matColumnDef="kms">
+        <th mat-header-cell *matHeaderCellDef>Kms</th>
+        <td mat-cell *matCellDef="let vehicle">{{vehicle.kms}}</td>
+      </ng-container>
+      <ng-container matColumnDef="color">
+        <th mat-header-cell *matHeaderCellDef>Color</th>
+        <td mat-cell *matCellDef="let vehicle">{{vehicle.color}}</td>
+      </ng-container>
+      <ng-container matColumnDef="comments">
+        <th mat-header-cell *matHeaderCellDef>Comentarios</th>
+        <td mat-cell *matCellDef="let vehicle">{{vehicle.comments}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button="Adicionar" (click)="add()" class="mat-button-vehicle">
+      <mat-icon svgIcon="plus"></mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

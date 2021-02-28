@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  height: 50px;
+  height: 100px;
   align-items: center;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .mat-button-position {
-  background-color: burlywood;
+  background-color: lightgreen;
   color: black;
   font-family: Algerian;
 }
@@ -45,13 +45,13 @@
 }
 
 .mat-button-client {
-  background-color: aliceblue;
+  background-color: bisque;
   color: black;
   font-family: Algerian;
 }
 
-.mat-button-activity {
-  background-color: cadetblue;
+.mat-button-workshop-type {
+  background-color: azure;
   color: black;
   font-family: Algerian;
 }
@@ -68,7 +68,7 @@
   font-family: Algerian;
 }
 
-.mat-button-vehicule {
+.mat-button-vehicle {
   background-color: darkgreen;
   color: white;
   font-family: Algerian;
@@ -77,5 +77,11 @@
 .mat-button-orderworkshop {
   background-color: black;
   color: white;
+  font-family: Algerian;
+}
+
+.mat-button-workshop-state {
+  background-color: coral;
+  color: black;
   font-family: Algerian;
 }

@@ -24,13 +24,13 @@ public class ServiceEmployee {
 
     public Optional<EntityEmployee> update(int id, EntityEmployee employee) {
         return getForId(id).map(record -> {
-            record.setAddress(employee.getAddress());
-            record.setEmail(employee.getEmail());
-            record.setIdentityNumber(employee.getIdentityNumber());
             record.setName(employee.getName());
             record.setPhone(employee.getPhone());
-            record.setPosition(employee.getPosition());
+            record.setIdentityNumber(employee.getIdentityNumber());
+            record.setEmail(employee.getEmail());
+            record.setAddress(employee.getAddress());
             record.setProvince(employee.getProvince());
+            record.setPosition(employee.getPosition());
             return save(record);
         });
     }
@@ -44,6 +44,6 @@ public class ServiceEmployee {
 
     public List<EntityEmployee> listAll() {
         return repositoryEmployee.findAll();
-
     }
+
 }

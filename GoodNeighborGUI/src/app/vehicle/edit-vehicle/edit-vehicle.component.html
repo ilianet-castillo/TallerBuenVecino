@@ -1,0 +1,64 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Editar Vehículo</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <div class="container">
+        <div class="container">
+          <mat-form-field>
+            <mat-label>Marca-Modelo:</mat-label>
+            <input matInput type="text" formControlName="markModel" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Chapa:</mat-label>
+            <input matInput type="text" formControlName="sheet" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Kms:</mat-label>
+            <input matInput type="text" formControlName="kms" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Color:</mat-label>
+            <input matInput type="text" formControlName="color" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Comentarios:</mat-label>
+            <input matInput type="text" formControlName="comments" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Del Cliente:</mat-label>
+            <select matNativeControl formControlName="client" required>
+              <option *ngFor="let client of clients" [ngValue]="client"
+                      [selected]="isClientSelect(client)">{{client.enterpriseName}}
+              </option>
+            </select>
+          </mat-form-field>
+        </div>
+      </div>
+      <br>
+      <mat-card-actions>
+        <button mat-raised-button title="Actualizar">
+          <mat-icon svgIcon="update"></mat-icon>
+        </button>
+        <button mat-raised-button title="Cancelar" (click)="cancel()">
+          <mat-icon svgIcon="cancel"></mat-icon>
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>

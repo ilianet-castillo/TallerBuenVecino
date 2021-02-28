@@ -3,35 +3,46 @@
     <mat-card-title>Orden del taller</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-form-field>
-      <mat-label>Fecha de la orden:</mat-label>
-      <input matInput disabled value="{{orderWorkshop?.dateOrder}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Fecha de entrada:</mat-label>
-      <input matInput disabled value="{{orderWorkshop?.dateEntrance}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Fecha de salida:</mat-label>
-      <input matInput disabled value="{{orderWorkshop?.dateExit}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Tipo:</mat-label>
-      <input matInput disabled value="{{orderWorkshop?.type}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Estado:</mat-label>
-      <input matInput disabled value="{{orderWorkshop?.state}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Empleado:</mat-label>
-      <input matInput disabled value="{{orderWorkshop?.employee?.name}}">
-    </mat-form-field>
+    <div class="container">
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Fecha de la orden:</mat-label>
+          <input matInput disabled value="{{orderWorkshop?.dateOrder}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Fecha de entrada:</mat-label>
+          <input matInput disabled value="{{orderWorkshop?.dateEntrance}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Fecha de salida:</mat-label>
+          <input matInput disabled value="{{orderWorkshop?.dateExit}}">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="container">
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Tipo:</mat-label>
+          <input matInput disabled value="{{orderWorkshop?.orderWorkshopType?.name}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Estado:</mat-label>
+          <input matInput disabled value="{{orderWorkshop?.orderWorkshopState?.name}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Empleado:</mat-label>
+          <input matInput disabled value="{{orderWorkshop?.employee?.name}}">
+        </mat-form-field>
+      </div>
+    </div>
     <br>
     <mat-card-actions>
       <button mat-icon-button title="Editar" (click)="edit()">

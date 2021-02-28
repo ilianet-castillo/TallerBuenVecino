@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Coin} from '../../coin/coin.model';
 import {PositionService} from '../position.service';
+import {PositionModel} from '../position.model';
 
 @Component({
   selector: 'app-list-position',
@@ -8,15 +8,16 @@ import {PositionService} from '../position.service';
   styleUrls: ['./list-position.component.css']
 })
 export class ListPositionComponent implements OnInit {
+
   displayedColumns: string[] = ['action', 'name'];
-  positions: Position[];
+  positions: PositionModel[];
 
   constructor(private positionService: PositionService) {
   }
 
   ngOnInit(): void {
     this.positionService.requestList().toPromise().then(value => {
-      this.positions = (value as Position[]);
+      this.positions = (value as PositionModel[]);
     }).catch(reason => alert(reason));
   }
 
@@ -24,7 +25,8 @@ export class ListPositionComponent implements OnInit {
     this.positionService.add();
   }
 
-  show(coin: Coin): void {
-    this.positionService.show(coin);
+  show(position: PositionModel): void {
+    this.positionService.show(position);
   }
+
 }

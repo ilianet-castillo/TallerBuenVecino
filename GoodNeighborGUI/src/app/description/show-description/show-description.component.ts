@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Description} from '../description.model';
+import {DescriptionModel} from '../description.model';
 import {DescriptionService} from '../description.service';
 
 @Component({
@@ -9,15 +9,14 @@ import {DescriptionService} from '../description.service';
 })
 export class ShowDescriptionComponent implements OnInit {
 
-  description: Description;
+  description: DescriptionModel;
 
   constructor(private descriptionService: DescriptionService) {
   }
 
   ngOnInit(): void {
-
     this.descriptionService.requestGet().toPromise().then(value => {
-      this.description = value as Description;
+      this.description = value as DescriptionModel;
     }).catch(reason => alert(reason));
   }
 

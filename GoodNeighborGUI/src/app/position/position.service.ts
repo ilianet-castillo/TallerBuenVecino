@@ -3,21 +3,24 @@ import {ApiService} from '../api.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {Position} from './position.model';
+import {PositionModel} from './position.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PositionService {
+
   url = 'position/';
 
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private apiService: ApiService,
+              private formBuilder: FormBuilder,
+              private router: Router) {
   }
 
   getForm(): FormGroup {
     return this.formBuilder.group({
       id: [''],
-      name: ['', Validators.required],
+      name: ['', Validators.required]
     });
   }
 
@@ -28,12 +31,12 @@ export class PositionService {
 
   requestAdd(addForm: FormGroup): void {
     if (addForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
-    if (confirm('¿Desea adicionar el cargo ' + (addForm.value as Position).name + '?')) {
+    if (confirm('¿Desea adicionar el cargo ' + (addForm.value as PositionModel).name + '?')) {
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Cargo' + (value as Position).name + 'Adicionado satisfactoriamente');
+        alert('Cargo ' + (value as PositionModel).name + ' adicionado satisfactoriamente.');
         this.list();
       }).catch(reason => alert(reason));
 
@@ -53,13 +56,13 @@ export class PositionService {
 
   requestUpdate(editForm: FormGroup) {
     if (editForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea actualizar el cargo' + (editForm.value as Position).name + '?')) {
+    if (confirm('¿Desea actualizar el cargo ' + (editForm.value as PositionModel).name + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Position' + (value as Position).name + 'actualizado satisfactoriamente');
+        alert('Position ' + (value as PositionModel).name + ' actualizado satisfactoriamente.');
         this.show(value);
       }).catch(reason => alert(reason));
     }
@@ -74,13 +77,13 @@ export class PositionService {
     this.router.navigate(['add-position']);
   }
 
-  show(position: Position): void {
+  show(position: PositionModel): void {
     window.localStorage.removeItem('positionId');
     window.localStorage.setItem('positionId', position.id.toString());
     this.router.navigate(['show-position']);
   }
 
-  edit(position: Position): void {
+  edit(position: PositionModel): void {
     window.localStorage.removeItem('positionId');
     window.localStorage.setItem('positionId', position.id.toString());
     this.router.navigate(['edit-position']);

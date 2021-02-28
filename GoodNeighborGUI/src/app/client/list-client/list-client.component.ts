@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Client} from '../client.model';
+import {ClientModel} from '../client.model';
 import {ClientService} from '../client.service';
 
 @Component({
@@ -8,15 +8,16 @@ import {ClientService} from '../client.service';
   styleUrls: ['./list-client.component.css']
 })
 export class ListClientComponent implements OnInit {
-  displayedColumns: string[] = ['action', 'enterpriseName', 'phone', 'address'];
-  clients: Client[];
+
+  displayedColumns: string[] = ['action', 'enterpriseName', 'phone'];
+  clients: ClientModel[];
 
   constructor(private clientService: ClientService) {
   }
 
   ngOnInit(): void {
     this.clientService.requestList().toPromise().then(value => {
-      this.clients = (value as Client[]);
+      this.clients = (value as ClientModel[]);
     }).catch(reason => alert(reason));
   }
 
@@ -24,7 +25,7 @@ export class ListClientComponent implements OnInit {
     this.clientService.add();
   }
 
-  show(client: Client): void {
+  show(client: ClientModel): void {
     this.clientService.show(client);
   }
 

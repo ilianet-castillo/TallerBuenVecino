@@ -3,41 +3,58 @@
     <mat-card-title>Empleado</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-form-field>
-      <mat-label>Nombre:</mat-label>
-      <input matInput disabled value="{{employee?.name}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Télefono:</mat-label>
-      <input matInput disabled value="{{employee?.phone}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Carne de Identidad:</mat-label>
-      <input matInput disabled value="{{employee?.identityNumber}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>E-mail:</mat-label>
-      <input matInput disabled value="{{employee?.email}}">
-    </mat-form-field>
-    <br>
+    <div class="container">
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Nombre:</mat-label>
+          <input matInput disabled value="{{employee?.name}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>E-mail:</mat-label>
+          <input matInput disabled value="{{employee?.email}}">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="container">
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Carne de Identidad:</mat-label>
+          <input matInput disabled value="{{employee?.identityNumber}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Télefono:</mat-label>
+          <input matInput disabled value="{{employee?.phone}}">
+        </mat-form-field>
+      </div>
+    </div>
     <mat-form-field>
       <mat-label>Dirección:</mat-label>
       <input matInput disabled value="{{employee?.address}}">
     </mat-form-field>
+    <div class="container">
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Provincia:</mat-label>
+          <input matInput disabled value="{{employee?.province?.name}}">
+        </mat-form-field>
+      </div>
+      <div class="fixed">
+        <mat-form-field>
+          <mat-label>Cargo:</mat-label>
+          <input matInput disabled value="{{employee?.position?.name}}">
+        </mat-form-field>
+      </div>
+    </div>
     <br>
-    <mat-form-field>
-      <mat-label>Provincia:</mat-label>
-      <input matInput disabled value="{{employee?.province?.name}}">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <mat-label>Cargo:</mat-label>
-      <input matInput disabled value="{{employee?.position?.name}}">
-    </mat-form-field>
-    <br>
+    <mat-list role="list">
+      <div mat-card-subtitle>&Oacute;rdenes de taller:</div>
+      <mat-list-item *ngFor="let orderWorkshop of employee?.orderWorkshops" role="listitem">{{orderWorkshop.id}}
+      </mat-list-item>
+    </mat-list>
     <mat-card-actions>
       <button mat-icon-button title="Editar" (click)="edit()">
         <mat-icon svgIcon="pencil"></mat-icon>
@@ -48,4 +65,3 @@
     </mat-card-actions>
   </mat-card-content>
 </mat-card>
-

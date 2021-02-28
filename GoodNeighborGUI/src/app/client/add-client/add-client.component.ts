@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {Position} from '../../position/position.model';
 import {ClientService} from '../client.service';
 
 @Component({
@@ -11,13 +10,8 @@ import {ClientService} from '../client.service';
 export class AddClientComponent implements OnInit {
 
   addForm: FormGroup;
-  positions: Position[];
 
   constructor(private clientService: ClientService) {
-    this.clientService.getPosition().toPromise().then(value => {
-      this.positions = (value as Position[]).sort((a, b) => a.name > b.name ? 1 : -1);
-    }).catch(reason => alert(reason));
-
   }
 
   ngOnInit(): void {

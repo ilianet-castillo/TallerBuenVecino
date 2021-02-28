@@ -8,6 +8,7 @@ import {PositionService} from '../position.service';
   styleUrls: ['./edit-position.component.css']
 })
 export class EditPositionComponent implements OnInit {
+
   editForm: FormGroup;
 
   constructor(private positionService: PositionService) {
@@ -27,4 +28,5 @@ export class EditPositionComponent implements OnInit {
   cancel() {
     this.positionService.show(this.editForm.value);
   }
+
 }

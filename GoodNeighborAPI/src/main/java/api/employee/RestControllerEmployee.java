@@ -31,7 +31,6 @@ public class RestControllerEmployee {
         return serviceEmployee.update(id, employee)
                 .map(record -> ResponseEntity.ok(record))
                 .orElse(ResponseEntity.notFound().build());
-
     }
 
     @DeleteMapping(path = "{id}")
@@ -39,11 +38,11 @@ public class RestControllerEmployee {
         return serviceEmployee.delete(id)
                 .map(record -> ResponseEntity.ok(record))
                 .orElse(ResponseEntity.notFound().build());
-
     }
 
     @GetMapping
     public List<EntityEmployee> showListEmployee() {
         return serviceEmployee.listAll();
     }
+
 }

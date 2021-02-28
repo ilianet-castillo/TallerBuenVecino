@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderWorkshop} from '../order-workshop.model';
+import {OrderWorkshopModel} from '../order-workshop.model';
 import {OrderWorkshopService} from '../order-workshop.service';
 
 @Component({
@@ -9,14 +9,14 @@ import {OrderWorkshopService} from '../order-workshop.service';
 })
 export class ListOrderWorkshopComponent implements OnInit {
   displayedColumns: string[] = ['action', 'dateOrder', 'dateEntrance', 'dateExit', 'type', 'state'];
-  orderWorkshops: OrderWorkshop[];
+  orderWorkshops: OrderWorkshopModel[];
 
   constructor(private orderWorkshopService: OrderWorkshopService) {
   }
 
   ngOnInit(): void {
     this.orderWorkshopService.requestList().toPromise().then(value => {
-      this.orderWorkshops = (value as OrderWorkshop[]);
+      this.orderWorkshops = (value as OrderWorkshopModel[]);
     }).catch(reason => alert(reason));
   }
 
@@ -24,7 +24,7 @@ export class ListOrderWorkshopComponent implements OnInit {
     this.orderWorkshopService.add();
   }
 
-  show(orderWorkshop: OrderWorkshop): void {
+  show(orderWorkshop: OrderWorkshopModel): void {
     this.orderWorkshopService.show(orderWorkshop);
   }
 

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Coin} from '../coin.model';
+import {CoinModel} from '../coin.model';
 import {CoinService} from '../coin.service';
 
 @Component({
@@ -8,15 +8,16 @@ import {CoinService} from '../coin.service';
   styleUrls: ['./list-coin.component.css']
 })
 export class ListCoinComponent implements OnInit {
+
   displayedColumns: string[] = ['action', 'name', 'acronym'];
-  coins: Coin[];
+  coins: CoinModel[];
 
   constructor(private coinService: CoinService) {
   }
 
   ngOnInit(): void {
     this.coinService.requestList().toPromise().then(value => {
-      this.coins = (value as Coin[]);
+      this.coins = (value as CoinModel[]);
     }).catch(reason => alert(reason));
   }
 
@@ -24,7 +25,7 @@ export class ListCoinComponent implements OnInit {
     this.coinService.add();
   }
 
-  show(coin: Coin): void {
+  show(coin: CoinModel): void {
     this.coinService.show(coin);
   }
 

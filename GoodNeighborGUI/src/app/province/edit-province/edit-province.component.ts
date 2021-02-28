@@ -8,6 +8,7 @@ import {ProvinceService} from '../province.service';
   styleUrls: ['./edit-province.component.css']
 })
 export class EditProvinceComponent implements OnInit {
+
   editForm: FormGroup;
 
   constructor(private provinceService: ProvinceService) {

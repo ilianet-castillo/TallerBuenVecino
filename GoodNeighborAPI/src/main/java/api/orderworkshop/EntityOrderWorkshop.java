@@ -1,93 +1,44 @@
 package api.orderworkshop;
 
 import api.employee.EntityEmployee;
+import api.orderworkshopstate.EntityOrderWorkshopState;
+import api.orderworkshoptype.EntityOrderWorkshopType;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Data
-@Table(name = "tborderworkshop")
+@Table(name = "tb_order_workshop")
 public class EntityOrderWorkshop {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private Date dateOrder;
-    private Date dateEntrance;
-    private Date dateExit;
-    private String type;
-    private String state;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tbemployeeid", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Date dateEntrance;
+
+    private Date dateExit;
+
+    @ManyToOne
+    @JoinColumn(name = "order_workshop_state_id", nullable = false)
+    private EntityOrderWorkshopState orderWorkshopState;
+
+    @ManyToOne
+    @JoinColumn(name = "order_workshop_type_id", nullable = false)
+    private EntityOrderWorkshopType orderWorkshopType;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
     private EntityEmployee employee;
 
-
-    // from delete here
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getDateOrder() {
-        return dateOrder;
-    }
-
-    public void setDateOrder(Date dateOrder) {
-        this.dateOrder = dateOrder;
-    }
-
-    public Date getDateEntrance() {
-        return dateEntrance;
-    }
-
-    public void setDateEntrance(Date dateEntrance) {
-        this.dateEntrance = dateEntrance;
-    }
-
-    public Date getDateExit() {
-        return dateExit;
-    }
-
-    public void setDateExit(Date dateExit) {
-        this.dateExit = dateExit;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public EntityEmployee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(EntityEmployee employee) {
-        this.employee = employee;
-    }
 }

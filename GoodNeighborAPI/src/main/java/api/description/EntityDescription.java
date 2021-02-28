@@ -2,72 +2,32 @@ package api.description;
 
 import api.invoice.EntityInvoice;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Data
-@Table(name = "tbdescription")
+@Table(name = "tb_description")
 public class EntityDescription {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int no;
+    @Column(nullable = false)
     private String workDescription;
+
+    @Column(nullable = false)
     private int amount;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tbinvoiceid", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne
+    @JoinColumn(name = "invoice_id", nullable = false)
     private EntityInvoice invoice;
 
-    // delete from here
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getNo() {
-        return no;
-    }
-
-    public void setNo(int no) {
-        this.no = no;
-    }
-
-    public String getWorkDescription() {
-        return workDescription;
-    }
-
-    public void setWorkDescription(String workDescription) {
-        this.workDescription = workDescription;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public EntityInvoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(EntityInvoice invoice) {
-        this.invoice = invoice;
-    }
 }

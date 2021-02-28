@@ -24,14 +24,13 @@ public class ServiceOrderWorkshop {
     }
 
     public Optional<EntityOrderWorkshop> update(int id, EntityOrderWorkshop orderWorkshop) {
-
         return getForId(id).map(record -> {
-            record.setEmployee(orderWorkshop.getEmployee());
-            record.setType(orderWorkshop.getType());
+            record.setDateOrder(orderWorkshop.getDateOrder());
             record.setDateEntrance(orderWorkshop.getDateEntrance());
             record.setDateExit(orderWorkshop.getDateExit());
-            record.setDateOrder(orderWorkshop.getDateOrder());
-            record.setState(orderWorkshop.getState());
+            record.setOrderWorkshopState(orderWorkshop.getOrderWorkshopState());
+            record.setOrderWorkshopType(orderWorkshop.getOrderWorkshopType());
+            record.setEmployee(orderWorkshop.getEmployee());
             return save(record);
         });
     }
@@ -46,4 +45,5 @@ public class ServiceOrderWorkshop {
     public List<EntityOrderWorkshop> listAll() {
         return repositoryOrderWorkshop.findAll();
     }
+
 }

@@ -44,4 +44,5 @@ public class RestControllerPosition {
     public List<EntityPosition> showListPosition() {
         return servicePosition.listAll();
     }
+
 }

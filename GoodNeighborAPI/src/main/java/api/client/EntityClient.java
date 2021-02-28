@@ -1,86 +1,42 @@
 package api.client;
 
-import api.position.EntityPosition;
+import api.vehicle.EntityVehicle;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
+@JsonIdentityInfo(property = "jsonId", generator = ObjectIdGenerators.IntSequenceGenerator.class, scope = EntityClient.class)
 @Entity
-@Table(name = "tbclient")
+@Table(name = "tb_client")
 public class EntityClient {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
     private String enterpriseName;
 
-    private int phone;
-
-    private String comment;
-
+    @Column(nullable = false)
     private String address;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tbpositionid", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private EntityPosition position;
+    @Column(nullable = false)
+    private long phone;
 
-    // remove from here
+    @Column(nullable = false)
+    private String comment;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    private Set<EntityVehicle> vehicles;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEnterpriseName() {
-        return enterpriseName;
-    }
-
-    public void setEnterpriseName(String enterpriseName) {
-        this.enterpriseName = enterpriseName;
-    }
-
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public EntityPosition getPosition() {
-        return position;
-    }
-
-    public void setPosition(EntityPosition position) {
-        this.position = position;
-    }
 }

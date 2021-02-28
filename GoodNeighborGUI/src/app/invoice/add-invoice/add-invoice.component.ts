@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {Type} from '../../type/type.model';
-import {Contact} from '../../contact/contact.model';
-import {Activity} from '../../activity/activity.model';
-import {Employee} from '../../employee/employee.model';
-import {Client} from '../../client/client.model';
+import {TypeModel} from '../../type/type.model';
+import {ContactModel} from '../../contact/contact.model';
+import {ClientModel} from '../../client/client.model';
+import {VehicleModel} from '../../vehicle/vehicle.model';
+import {CoinModel} from '../../coin/coin.model';
+import {EmployeeModel} from '../../employee/employee.model';
 import {InvoiceService} from '../invoice.service';
 
 @Component({
@@ -13,32 +14,34 @@ import {InvoiceService} from '../invoice.service';
   styleUrls: ['./add-invoice.component.css']
 })
 export class AddInvoiceComponent implements OnInit {
+
   addForm: FormGroup;
-  types: Type[];
-  contacts: Contact[];
-  activitys: Activity[];
-  employees: Employee[];
-  clients: Client[];
+  types: TypeModel[];
+  contacts: ContactModel[];
+  clients: ClientModel[];
+  vehicles: VehicleModel[];
+  coins: CoinModel[];
+  employees: EmployeeModel[];
 
   constructor(private invoiceService: InvoiceService) {
     this.invoiceService.getType().toPromise().then(value => {
-      this.types = (value as Type[]).sort((a, b) => a.type > b.type ? 1 : -1);
+      this.types = (value as TypeModel[]).sort((a, b) => a.type > b.type ? 1 : -1);
     }).catch(reason => alert(reason));
 
     this.invoiceService.getContact().toPromise().then(value => {
-      this.contacts = (value as Contact[]).sort((a, b) => a.name > b.name ? 1 : -1);
-    }).catch(reason => alert(reason));
-
-    this.invoiceService.getActivity().toPromise().then(value => {
-      this.activitys = (value as Activity[]).sort((a, b) => a.name > b.name ? 1 : -1);
-    }).catch(reason => alert(reason));
-
-    this.invoiceService.getEmployee().toPromise().then(value => {
-      this.employees = (value as Employee[]).sort((a, b) => a.name > b.name ? 1 : -1);
+      this.contacts = (value as ContactModel[]).sort((a, b) => a.name > b.name ? 1 : -1);
     }).catch(reason => alert(reason));
 
     this.invoiceService.getClient().toPromise().then(value => {
-      this.clients = (value as Client[]).sort((a, b) => a.enterpriseName > b.enterpriseName ? 1 : -1);
+      this.clients = (value as ClientModel[]).sort((a, b) => a.enterpriseName > b.enterpriseName ? 1 : -1);
+    }).catch(reason => alert(reason));
+
+    this.invoiceService.getCoin().toPromise().then(value => {
+      this.coins = (value as CoinModel[]).sort((a, b) => a.acronym > b.acronym ? 1 : -1);
+    }).catch(reason => alert(reason));
+
+    this.invoiceService.getEmployee().toPromise().then(value => {
+      this.employees = (value as EmployeeModel[]).sort((a, b) => a.name > b.name ? 1 : -1);
     }).catch(reason => alert(reason));
   }
 
@@ -54,7 +57,12 @@ export class AddInvoiceComponent implements OnInit {
     return this.invoiceService.getDate();
   }
 
+  getVehicles(client: ClientModel) {
+    this.vehicles = client.vehicles;
+  }
+
   cancel(): void {
     this.invoiceService.list();
   }
+
 }

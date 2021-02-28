@@ -3,7 +3,7 @@ import {ApiService} from '../api.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {Coin} from './coin.model';
+import {CoinModel} from './coin.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +30,12 @@ export class CoinService {
 
   requestAdd(addForm: FormGroup): void {
     if (addForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar');
       return;
     }
-    if (confirm('¿Desea adicionar la moneda ' + (addForm.value as Coin).name + '?')) {
+    if (confirm('¿Desea adicionar la moneda ' + (addForm.value as CoinModel).name + '?')) {
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Moneda' + (value as Coin).name + 'Adicionada satisfactoriamente');
+        alert('Moneda ' + (value as CoinModel).name + ' adicionada satisfactoriamente');
         this.list();
       }).catch(reason => alert(reason));
 
@@ -59,9 +59,9 @@ export class CoinService {
       return;
     }
 
-    if (confirm('¿Desea actualizar la moneda' + (editForm.value as Coin).name + '?')) {
+    if (confirm('¿Desea actualizar la moneda ' + (editForm.value as CoinModel).name + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Coin' + (value as Coin).name + 'actualizada satisfactoriamente');
+        alert('Moneda ' + (value as CoinModel).name + ' actualizada satisfactoriamente');
         this.show(value);
       }).catch(reason => alert(reason));
     }
@@ -76,13 +76,13 @@ export class CoinService {
     this.router.navigate(['add-coin']);
   }
 
-  show(coin: Coin): void {
+  show(coin: CoinModel): void {
     window.localStorage.removeItem('coinId');
     window.localStorage.setItem('coinId', coin.id.toString());
     this.router.navigate(['show-coin']);
   }
 
-  edit(coin: Coin): void {
+  edit(coin: CoinModel): void {
     window.localStorage.removeItem('coinId');
     window.localStorage.setItem('coinId', coin.id.toString());
     this.router.navigate(['edit-coin']);

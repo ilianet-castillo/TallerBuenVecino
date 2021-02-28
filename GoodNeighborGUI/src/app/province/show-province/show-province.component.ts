@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Province} from '../province.model';
+import {ProvinceModel} from '../province.model';
 import {ProvinceService} from '../province.service';
-import {Position} from '../../position/position.model';
+import {PositionModel} from '../../position/position.model';
 
 @Component({
   selector: 'app-show-province',
@@ -9,14 +9,15 @@ import {Position} from '../../position/position.model';
   styleUrls: ['./show-province.component.css']
 })
 export class ShowProvinceComponent implements OnInit {
-  province: Province;
+
+  province: ProvinceModel;
 
   constructor(private provinceService: ProvinceService) {
   }
 
   ngOnInit(): void {
     this.provinceService.requestGet().toPromise().then(value => {
-      this.province = value as Position;
+      this.province = value as PositionModel;
     }).catch(reason => alert(reason));
   }
 

@@ -12,7 +12,6 @@ import java.util.Optional;
 public class ServiceClient {
 
     @Autowired
-
     private RepositoryClient repositoryClient;
 
     public EntityClient save(EntityClient client) {
@@ -24,12 +23,11 @@ public class ServiceClient {
     }
 
     public Optional<EntityClient> update(int id, EntityClient client) {
-
         return getForId(id).map(record -> {
-            record.setAddress(client.getAddress());
-            record.setComment(client.getComment());
             record.setEnterpriseName(client.getEnterpriseName());
+            record.setAddress(client.getAddress());
             record.setPhone(client.getPhone());
+            record.setComment(client.getComment());
             return save(record);
         });
     }
@@ -44,4 +42,5 @@ public class ServiceClient {
     public List<EntityClient> listAll() {
         return repositoryClient.findAll();
     }
+
 }

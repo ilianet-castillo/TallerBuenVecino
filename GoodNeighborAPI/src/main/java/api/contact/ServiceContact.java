@@ -24,14 +24,14 @@ public class ServiceContact {
 
     public Optional<EntityContact> update(int id, EntityContact contact) {
         return getForId(id).map(record -> {
-            record.setAccountNumberCUC(contact.getAccountNumberCUC());
-            record.setAccountNumberCUP(contact.getAccountNumberCUP());
+            record.setName(contact.getName());
             record.setAddress(contact.getAddress());
             record.setEmail(contact.getEmail());
-            record.setName(contact.getName());
-            record.setNit(contact.getNit());
             record.setPhone(contact.getPhone());
             record.setTcp(contact.getTcp());
+            record.setNit(contact.getNit());
+            record.setAccountNumberCUP(contact.getAccountNumberCUP());
+            record.setAccountNumberCUC(contact.getAccountNumberCUC());
             return save(record);
         });
     }
@@ -46,4 +46,5 @@ public class ServiceContact {
     public List<EntityContact> listAll() {
         return repositoryContact.findAll();
     }
+
 }

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ApiService} from '../api.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {Contact} from './contact.model';
+import {ContactModel} from './contact.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class ContactService {
       id: [''],
       name: ['', Validators.required],
       address: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', Validators.email],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.minLength(10), Validators.maxLength(10)]],
       tcp: ['', Validators.required],
       nit: ['', [Validators.required, Validators.pattern(/^[0-9]*$/), Validators.minLength(11), Validators.maxLength(11)]],
@@ -38,13 +38,13 @@ export class ContactService {
 
   requestAdd(addForm: FormGroup): void {
     if (addForm.invalid) {
-      alert('Campos obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea adicionar el contacto ' + (addForm.value as Contact).name + '?')) {
+    if (confirm('¿Desea adicionar el contacto ' + (addForm.value as ContactModel).name + '?')) {
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Contacto' + (value as Contact).name + 'Adicionado satisfactoriamente');
+        alert('Contacto ' + (value as ContactModel).name + ' adicionado satisfactoriamente');
         this.list();
       }).catch(reason => alert(reason));
 
@@ -64,13 +64,13 @@ export class ContactService {
 
   requestUpdate(editForm: FormGroup) {
     if (editForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos Obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea actualizar el contact' + (editForm.value as Contact).name + '?')) {
+    if (confirm('¿Desea actualizar el contact ' + (editForm.value as ContactModel).name + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Contact' + (value as Contact).name + 'actualizado satisfactoriamente');
+        alert('Contacto ' + (value as ContactModel).name + ' actualizado satisfactoriamente');
         this.show(value);
       }).catch(reason => alert(reason));
     }
@@ -85,13 +85,13 @@ export class ContactService {
     this.router.navigate(['add-contact']);
   }
 
-  show(contact: Contact): void {
+  show(contact: ContactModel): void {
     window.localStorage.removeItem('contactId');
     window.localStorage.setItem('contactId', contact.id.toString());
     this.router.navigate(['show-contact']);
   }
 
-  edit(contact: Contact): void {
+  edit(contact: ContactModel): void {
     window.localStorage.removeItem('contactId');
     window.localStorage.setItem('contactId', contact.id.toString());
     this.router.navigate(['edit-contact']);

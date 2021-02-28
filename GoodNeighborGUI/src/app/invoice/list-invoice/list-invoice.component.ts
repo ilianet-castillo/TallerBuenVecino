@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Invoice} from '../invoice.model';
+import {InvoiceModel} from '../invoice.model';
 import {InvoiceService} from '../invoice.service';
 
 @Component({
@@ -8,15 +8,16 @@ import {InvoiceService} from '../invoice.service';
   styleUrls: ['./list-invoice.component.css']
 })
 export class ListInvoiceComponent implements OnInit {
-  displayedColumns: string[] = ['action', 'date', 'signature'];
-  invoices: Invoice[];
+
+  displayedColumns: string[] = ['action', 'date', 'type'];
+  invoices: InvoiceModel[];
 
   constructor(private invoiceService: InvoiceService) {
   }
 
   ngOnInit(): void {
     this.invoiceService.requestList().toPromise().then(value => {
-      this.invoices = (value as Invoice[]);
+      this.invoices = (value as InvoiceModel[]);
     }).catch(reason => alert(reason));
   }
 
@@ -24,7 +25,7 @@ export class ListInvoiceComponent implements OnInit {
     this.invoiceService.add();
   }
 
-  show(invoice: Invoice): void {
+  show(invoice: InvoiceModel): void {
     this.invoiceService.show(invoice);
   }
 

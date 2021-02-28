@@ -8,6 +8,7 @@ import {TypeService} from '../type.service';
   styleUrls: ['./edit-type.component.css']
 })
 export class EditTypeComponent implements OnInit {
+
   editForm: FormGroup;
 
   constructor(private typeService: TypeService) {

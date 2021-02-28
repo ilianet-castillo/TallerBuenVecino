@@ -4,43 +4,49 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TypeService} from '../type/type.service';
 import {ContactService} from '../contact/contact.service';
-import {ActivityService} from '../activity/activity.service';
-import {EmployeeService} from '../employee/employee.service';
 import {ClientService} from '../client/client.service';
+import {CoinService} from '../coin/coin.service';
+import {EmployeeService} from '../employee/employee.service';
 import {Observable} from 'rxjs';
-import {Invoice} from './invoice.model';
+import {InvoiceModel} from './invoice.model';
 import {saveAs} from '../../../node_modules/file-saver';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceService {
+
   url = 'invoice/';
 
   constructor(private apiService: ApiService,
               private formBuilder: FormBuilder,
-              private router: Router, private typeService: TypeService,
+              private router: Router,
+              private typeService: TypeService,
               private contactService: ContactService,
-              private activityService: ActivityService,
-              private employeeService: EmployeeService,
-              private clientService: ClientService) {
+              private clientService: ClientService,
+              private coinService: CoinService,
+              private employeeService: EmployeeService) {
   }
 
   getForm(): FormGroup {
     return this.formBuilder.group({
+      jsonId: [''],
       id: [''],
-      date: ['', Validators.required],
-      signature: ['', Validators.required],
-      type: ['', Validators.required],
+      invoiceType: ['', Validators.required],
       contact: ['', Validators.required],
-      activity: ['', Validators.required],
-      employee: ['', Validators.required],
-      client: ['', Validators.required]
+      activityName: ['', Validators.required],
+      activityClient: ['', Validators.required],
+      activityVehicle: ['', Validators.required],
+      activityNuInvoice: ['', Validators.required],
+      activityReferenceOt: ['', Validators.required],
+      activityNuReferenceOt: ['', Validators.required],
+      activityDate: ['', Validators.required],
+      activityCoin: ['', Validators.required],
+      descriptions: [''],
+      employeeInvoice: ['', Validators.required],
+      employeeReceive: ['', Validators.required],
+      date: ['', Validators.required]
     });
-  }
-
-  getDate(): Date {
-    return new Date();
   }
 
   // ApiService
@@ -50,13 +56,15 @@ export class InvoiceService {
 
   requestAdd(addForm: FormGroup): void {
     if (addForm.invalid) {
-      alert('Campos obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea adicionar la factura ' + (addForm.value as Invoice).date + '?')) {
+    if (confirm('¿Desea adicionar la factura ' + (addForm.value as InvoiceModel).activityNuInvoice + '?')) {
+      (addForm.value as InvoiceModel).jsonId = Math.random();
+      (addForm.value as InvoiceModel).descriptions = [];
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Factura' + (value as Invoice).date + 'Adicionada satisfactoriamente');
+        alert('Factura ' + (value as InvoiceModel).activityNuInvoice + ' adicionada satisfactoriamente');
         this.list();
       }).catch(reason => alert(reason));
 
@@ -76,13 +84,13 @@ export class InvoiceService {
 
   requestUpdate(editForm: FormGroup) {
     if (editForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos Obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea actualizar la factura ' + (editForm.value as Invoice).date + '?')) {
+    if (confirm('¿Desea actualizar la factura ' + (editForm.value as InvoiceModel).activityNuInvoice + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Factura' + (value as Invoice).date + 'actualizada satisfactoriamente');
+        alert('Factura ' + (value as InvoiceModel).activityNuInvoice + ' actualizada satisfactoriamente');
         this.show(value);
       }).catch(reason => alert(reason));
     }
@@ -97,13 +105,13 @@ export class InvoiceService {
     this.router.navigate(['add-invoice']);
   }
 
-  show(invoice: Invoice): void {
+  show(invoice: InvoiceModel): void {
     window.localStorage.removeItem('invoiceId');
     window.localStorage.setItem('invoiceId', invoice.id.toString());
     this.router.navigate(['show-invoice']);
   }
 
-  edit(invoice: Invoice): void {
+  edit(invoice: InvoiceModel): void {
     window.localStorage.removeItem('invoiceId');
     window.localStorage.setItem('invoiceId', invoice.id.toString());
     this.router.navigate(['edit-invoice']);
@@ -125,16 +133,20 @@ export class InvoiceService {
     return this.contactService.requestList();
   }
 
-  getActivity(): Observable<any> {
-    return this.activityService.requestList();
+  getClient(): Observable<any> {
+    return this.clientService.requestList();
+  }
+
+  getCoin(): Observable<any> {
+    return this.coinService.requestList();
   }
 
   getEmployee(): Observable<any> {
     return this.employeeService.requestList();
   }
 
-  getClient(): Observable<any> {
-    return this.clientService.requestList();
+  getDate(): Date {
+    return new Date();
   }
 
 }

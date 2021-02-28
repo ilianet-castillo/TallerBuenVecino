@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Contact} from '../contact.model';
+import {ContactModel} from '../contact.model';
 import {ContactService} from '../contact.service';
 
 @Component({
@@ -9,14 +9,14 @@ import {ContactService} from '../contact.service';
 })
 export class ShowContactComponent implements OnInit {
 
-  contact: Contact;
+  contact: ContactModel;
 
   constructor(private contactService: ContactService) {
   }
 
   ngOnInit(): void {
     this.contactService.requestGet().toPromise().then(value => {
-      this.contact = value as Contact;
+      this.contact = value as ContactModel;
     }).catch(reason => alert(reason));
   }
 

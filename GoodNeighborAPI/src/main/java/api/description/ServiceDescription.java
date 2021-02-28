@@ -23,19 +23,17 @@ public class ServiceDescription {
     }
 
     public Optional<EntityDescription> update(int id, EntityDescription description) {
-
         return getForId(id).map(record -> {
+            record.setWorkDescription(description.getWorkDescription());
             record.setAmount(description.getAmount());
             record.setInvoice(description.getInvoice());
-            record.setNo(description.getNo());
-            record.setWorkDescription(description.getWorkDescription());
             return save(record);
         });
     }
 
     public Optional<EntityDescription> delete(int id) {
         return getForId(id).map(record -> {
-            repositoryDescription.delete(record);
+            repositoryDescription.deleteById(id);
             return record;
         });
     }
@@ -43,4 +41,5 @@ public class ServiceDescription {
     public List<EntityDescription> listAll() {
         return repositoryDescription.findAll();
     }
+
 }

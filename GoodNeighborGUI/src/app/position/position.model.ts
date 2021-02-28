@@ -1,4 +1,6 @@
-export class Position {
+export class PositionModel {
+
   id: number;
   name: string;
+
 }

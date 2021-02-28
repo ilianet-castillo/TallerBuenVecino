@@ -3,21 +3,24 @@ import {ApiService} from '../api.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {Province} from './province.model';
+import {ProvinceModel} from './province.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProvinceService {
+
   url = 'province/';
 
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private apiService: ApiService,
+              private formBuilder: FormBuilder,
+              private router: Router) {
   }
 
   getForm(): FormGroup {
     return this.formBuilder.group({
       id: [''],
-      name: ['', Validators.required],
+      name: ['', Validators.required]
     });
   }
 
@@ -28,15 +31,15 @@ export class ProvinceService {
 
   requestAdd(addForm: FormGroup): void {
     if (addForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
-    if (confirm('¿Desea adicionar la provincia ' + (addForm.value as Province).name + '?')) {
+
+    if (confirm('¿Desea adicionar la provincia ' + (addForm.value as ProvinceModel).name + '?')) {
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Provincia' + (value as Province).name + 'Adicionada satisfactoriamente');
+        alert('Provincia ' + (value as ProvinceModel).name + ' adicionada satisfactoriamente.');
         this.list();
       }).catch(reason => alert(reason));
-
     }
   }
 
@@ -53,13 +56,13 @@ export class ProvinceService {
 
   requestUpdate(editForm: FormGroup) {
     if (editForm.invalid) {
-      alert('Campos Obligatorios sin llenar');
+      alert('Campos obligatorios sin llenar.');
       return;
     }
 
-    if (confirm('¿Desea actualizar la provincia' + (editForm.value as Province).name + '?')) {
+    if (confirm('¿Desea actualizar la provincia ' + (editForm.value as ProvinceModel).name + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Province' + (value as Province).name + 'actualizada satisfactoriamente');
+        alert('ProvinceModel ' + (value as ProvinceModel).name + ' actualizada satisfactoriamente.');
         this.show(value);
       }).catch(reason => alert(reason));
     }
@@ -74,13 +77,13 @@ export class ProvinceService {
     this.router.navigate(['add-province']);
   }
 
-  show(province: Province): void {
+  show(province: ProvinceModel): void {
     window.localStorage.removeItem('provinceId');
     window.localStorage.setItem('provinceId', province.id.toString());
     this.router.navigate(['show-province']);
   }
 
-  edit(province: Province): void {
+  edit(province: ProvinceModel): void {
     window.localStorage.removeItem('provinceId');
     window.localStorage.setItem('provinceId', province.id.toString());
     this.router.navigate(['edit-province']);

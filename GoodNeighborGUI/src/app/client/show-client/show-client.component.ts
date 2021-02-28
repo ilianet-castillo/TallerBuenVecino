@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Client} from '../client.model';
+import {ClientModel} from '../client.model';
 import {ClientService} from '../client.service';
 
 @Component({
@@ -8,14 +8,15 @@ import {ClientService} from '../client.service';
   styleUrls: ['./show-client.component.css']
 })
 export class ShowClientComponent implements OnInit {
-  client: Client;
+
+  client: ClientModel;
 
   constructor(private clientService: ClientService) {
   }
 
   ngOnInit(): void {
     this.clientService.requestGet().toPromise().then(value => {
-      this.client = value as Client;
+      this.client = value as ClientModel;
     }).catch(reason => alert(reason));
   }
 

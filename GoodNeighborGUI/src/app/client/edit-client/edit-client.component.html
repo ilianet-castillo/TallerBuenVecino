@@ -8,31 +8,24 @@
         <mat-label>Nombre de la Empresa:</mat-label>
         <input matInput type="text" formControlName="enterpriseName" autocomplete="off" required>
       </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Télefono:</mat-label>
-        <input matInput type="text" formControlName="phone" autocomplete="off" required>
-      </mat-form-field>
-      <br>
+      <div class="container">
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>Direcci&oacute;n:</mat-label>
+            <input matInput type="text" formControlName="address" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+        <div class="fixed">
+          <mat-form-field>
+            <mat-label>T&eacute;lefono:</mat-label>
+            <input matInput type="text" formControlName="phone" autocomplete="off" required>
+          </mat-form-field>
+        </div>
+      </div>
       <mat-form-field>
         <mat-label>Comentarios:</mat-label>
         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
                   cdkAutosizeMaxRows="5" formControlName="comment" required></textarea>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <mat-label>Dirección:</mat-label>
-        <input matInput type="text" formControlName="address" autocomplete="off" required>
-      </mat-form-field>
-      <br>
-
-      <mat-form-field>
-        <mat-label>Cargo:</mat-label>
-        <select matNativeControl formControlName="position" required>
-          <option *ngFor="let position of positions" [ngValue]="position" [selected]="isPositionSelect(position)">
-            {{position.name}}
-          </option>
-        </select>
       </mat-form-field>
       <br>
       <mat-card-actions>
@@ -43,8 +36,6 @@
           <mat-icon svgIcon="cancel"></mat-icon>
         </button>
       </mat-card-actions>
-      <input formControlName="id" style="visibility: hidden">
     </form>
   </mat-card-content>
 </mat-card>
-

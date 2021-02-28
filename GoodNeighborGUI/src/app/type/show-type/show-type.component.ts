@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Type} from '../type.model';
+import {TypeModel} from '../type.model';
 import {TypeService} from '../type.service';
 
 @Component({
@@ -9,14 +9,14 @@ import {TypeService} from '../type.service';
 })
 export class ShowTypeComponent implements OnInit {
 
-  type: Type;
+  type: TypeModel;
 
   constructor(private typeService: TypeService) {
   }
 
   ngOnInit(): void {
     this.typeService.requestGet().toPromise().then(value => {
-      this.type = value as Type;
+      this.type = value as TypeModel;
     }).catch(reason => alert(reason));
   }
 

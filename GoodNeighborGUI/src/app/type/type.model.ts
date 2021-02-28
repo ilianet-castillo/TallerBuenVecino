@@ -1,6 +1,7 @@
-export class Type {
+export class TypeModel {
 
   id: number;
   type: string;
   title: string;
+
 }

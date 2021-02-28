@@ -1,10 +1,10 @@
-import {Invoice} from '../invoice/invoice.model';
+import {InvoiceModel} from '../invoice/invoice.model';
 
-export class Description {
+export class DescriptionModel {
 
   id: number;
-  no: number;
   workDescription: string;
   amount: number;
-  invoice: Invoice;
+  invoice: InvoiceModel;
+
 }
