@@ -7,15 +7,6 @@
       <div class="container">
         <div class="fixed">
           <mat-form-field>
-            <mat-label>Fecha de la orden:</mat-label>
-            <input matInput [matDatepicker]="pickerDateOrder" [max]="getDate()" formControlName="dateOrder" readonly
-                   required>
-            <mat-datepicker-toggle matSuffix [for]="pickerDateOrder"></mat-datepicker-toggle>
-            <mat-datepicker #pickerDateOrder></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="fixed">
-          <mat-form-field>
             <mat-label>Fecha de entrada:</mat-label>
             <input matInput [matDatepicker]="pickerDateEntrance" [max]="getDate()" formControlName="dateEntrance"
                    readonly
@@ -27,8 +18,7 @@
         <div class="fixed">
           <mat-form-field>
             <mat-label>Fecha de salida:</mat-label>
-            <input matInput [matDatepicker]="pickerDateExit" [min]="getDate()" formControlName="dateExit" readonly
-                   required>
+            <input matInput [matDatepicker]="pickerDateExit" [min]="getDate()" formControlName="dateExit" readonly>
             <mat-datepicker-toggle matSuffix [for]="pickerDateExit"></mat-datepicker-toggle>
             <mat-datepicker #pickerDateExit></mat-datepicker>
           </mat-form-field>

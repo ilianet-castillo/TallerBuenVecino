@@ -5,7 +5,6 @@ import {EmployeeModel} from '../employee/employee.model';
 export class OrderWorkshopModel {
 
   id: number;
-  dateOrder: Date;
   dateEntrance: Date;
   dateExit: Date;
   orderWorkshopState: OrderWorkshopStateModel;

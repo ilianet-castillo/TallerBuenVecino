@@ -8,7 +8,7 @@ import {OrderWorkshopService} from '../order-workshop.service';
   styleUrls: ['./list-order-workshop.component.css']
 })
 export class ListOrderWorkshopComponent implements OnInit {
-  displayedColumns: string[] = ['action', 'dateOrder', 'dateEntrance', 'dateExit', 'type', 'state'];
+  displayedColumns: string[] = ['action', 'dateEntrance', 'dateExit', 'type', 'state'];
   orderWorkshops: OrderWorkshopModel[];
 
   constructor(private orderWorkshopService: OrderWorkshopService) {

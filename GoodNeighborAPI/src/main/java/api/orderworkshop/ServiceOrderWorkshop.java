@@ -25,7 +25,6 @@ public class ServiceOrderWorkshop {
 
     public Optional<EntityOrderWorkshop> update(int id, EntityOrderWorkshop orderWorkshop) {
         return getForId(id).map(record -> {
-            record.setDateOrder(orderWorkshop.getDateOrder());
             record.setDateEntrance(orderWorkshop.getDateEntrance());
             record.setDateExit(orderWorkshop.getDateExit());
             record.setOrderWorkshopState(orderWorkshop.getOrderWorkshopState());

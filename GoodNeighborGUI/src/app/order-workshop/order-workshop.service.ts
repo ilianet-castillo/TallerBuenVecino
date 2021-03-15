@@ -26,9 +26,8 @@ export class OrderWorkshopService {
   getForm(): FormGroup {
     return this.formBuilder.group({
       id: [''],
-      dateOrder: ['', Validators.required],
       dateEntrance: ['', Validators.required],
-      dateExit: ['', Validators.required],
+      dateExit: [''],
       orderWorkshopState: ['', Validators.required],
       orderWorkshopType: ['', Validators.required],
       employee: ['', Validators.required],
@@ -50,9 +49,9 @@ export class OrderWorkshopService {
       return;
     }
 
-    if (confirm('¿Desea adicionar la orden del taller ' + (addForm.value as OrderWorkshopModel).dateOrder + '?')) {
+    if (confirm('¿Desea adicionar la orden del taller ' + (addForm.value as OrderWorkshopModel).id + '?')) {
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Orden del taller' + (value as OrderWorkshopModel).dateOrder + 'Adicionado satisfactoriamente');
+        alert('Orden del taller' + (value as OrderWorkshopModel).id + ' adicionada satisfactoriamente');
         this.list();
       }).catch(reason => alert(reason));
 
@@ -76,9 +75,9 @@ export class OrderWorkshopService {
       return;
     }
 
-    if (confirm('¿Desea actualizar la ordel del taller ' + (editForm.value as OrderWorkshopModel).dateOrder + '?')) {
+    if (confirm('¿Desea actualizar la ordel del taller ' + (editForm.value as OrderWorkshopModel).id + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Orden del taller ' + (value as OrderWorkshopModel).dateOrder + 'actualizada satisfactoriamente');
+        alert('Orden del taller ' + (value as OrderWorkshopModel).id + ' actualizada satisfactoriamente');
         this.show(value);
       }).catch(reason => alert(reason));
     }

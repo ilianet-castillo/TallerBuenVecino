@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,9 +23,7 @@ public class EntityOrderWorkshop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private Date dateOrder;
-
-    private Date dateEntrance;
+    private Date dateEntrance = new Date(System.currentTimeMillis());
 
     private Date dateExit;
 
