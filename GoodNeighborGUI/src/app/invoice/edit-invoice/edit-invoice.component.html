@@ -75,14 +75,6 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div class="fixed">
-          <mat-form-field>
-            <mat-label>Moneda:</mat-label>
-            <select matNativeControl formControlName="activityCoin" required>
-              <option *ngFor="let coin of coins" [ngValue]="coin" [selected]="isCoinSelect(coin)">{{coin.name}}</option>
-            </select>
-          </mat-form-field>
-        </div>
       </div>
       <div class="container">
         <div class="fixed">

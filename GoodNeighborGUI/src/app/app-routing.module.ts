@@ -11,18 +11,10 @@ import {ListTypeComponent} from './type/list-type/list-type.component';
 import {AddTypeComponent} from './type/add-type/add-type.component';
 import {ShowTypeComponent} from './type/show-type/show-type.component';
 import {EditTypeComponent} from './type/edit-type/edit-type.component';
-import {ListCoinComponent} from './coin/list-coin/list-coin.component';
-import {AddCoinComponent} from './coin/add-coin/add-coin.component';
-import {ShowCoinComponent} from './coin/show-coin/show-coin.component';
-import {EditCoinComponent} from './coin/edit-coin/edit-coin.component';
 import {ListPositionComponent} from './position/list-position/list-position.component';
 import {AddPositionComponent} from './position/add-position/add-position.component';
 import {ShowPositionComponent} from './position/show-position/show-position.component';
 import {EditPositionComponent} from './position/edit-position/edit-position.component';
-import {ListProvinceComponent} from './province/list-province/list-province.component';
-import {AddProvinceComponent} from './province/add-province/add-province.component';
-import {ShowProvinceComponent} from './province/show-province/show-province.component';
-import {EditProvinceComponent} from './province/edit-province/edit-province.component';
 import {ShowEmployeeComponent} from './employee/show-employee/show-employee.component';
 import {EditEmployeeComponent} from './employee/edit-employee/edit-employee.component';
 import {ListClientComponent} from './client/list-client/list-client.component';
@@ -69,18 +61,10 @@ const routes: Routes = [
   {path: 'add-type', component: AddTypeComponent},
   {path: 'show-type', component: ShowTypeComponent},
   {path: 'edit-type', component: EditTypeComponent},
-  {path: 'list-coin', component: ListCoinComponent},
-  {path: 'add-coin', component: AddCoinComponent},
-  {path: 'show-coin', component: ShowCoinComponent},
-  {path: 'edit-coin', component: EditCoinComponent},
   {path: 'list-position', component: ListPositionComponent},
   {path: 'add-position', component: AddPositionComponent},
   {path: 'show-position', component: ShowPositionComponent},
   {path: 'edit-position', component: EditPositionComponent},
-  {path: 'list-province', component: ListProvinceComponent},
-  {path: 'add-province', component: AddProvinceComponent},
-  {path: 'show-province', component: ShowProvinceComponent},
-  {path: 'edit-province', component: EditProvinceComponent},
   {path: 'list-client', component: ListClientComponent},
   {path: 'add-client', component: AddClientComponent},
   {path: 'show-client', component: ShowClientComponent},

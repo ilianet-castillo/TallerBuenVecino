@@ -1,87 +1,97 @@
 .container {
   display: flex;
-  height: 100px;
+  height: 60px;
   align-items: center;
 }
 
 .fixed {
-  width: 200px;
+  width: 250px;
 }
 
 .mat-button-contact {
-  background-color: antiquewhite;
-  color: black;
+  background-color: darkorange;
+  color: white;
   font-family: Algerian;
+  width: 180px;
+  min-width: initial;
 }
 
 .mat-button-employee {
-  background-color: red;
-  color: white;
+  background-color: azure;
+  color: black;
   font-family: Algerian;
+  width: 180px;
+  min-width: initial;
 }
 
 .mat-button-type {
-  background-color: blueviolet;
+  background-color: darkred;
   color: white;
   font-family: Algerian;
-}
-
-.mat-button-coin {
-  background-color: crimson;
-  color: white;
-  font-family: Algerian;
+  width: 180px;
+  min-width: initial;
 }
 
 .mat-button-position {
-  background-color: lightgreen;
-  color: black;
-  font-family: Algerian;
-}
-
-.mat-button-province {
-  background-color: darkblue;
+  background-color: red;
   color: white;
   font-family: Algerian;
+  width: 180px;
+  min-width: initial;
 }
 
 .mat-button-client {
   background-color: bisque;
   color: black;
   font-family: Algerian;
+  width: 180px;
+  min-width: initial;
 }
 
 .mat-button-workshop-type {
-  background-color: azure;
-  color: black;
+  background-color: darkmagenta;
+  color: white;
   font-family: Algerian;
+  width: 180px;
+  min-width: initial;
 }
 
 .mat-button-invoice {
   background-color: burlywood;
   color: black;
   font-family: Algerian;
+  width: 180px;
+  min-width: initial;
 }
 
 .mat-button-description {
-  background-color: chartreuse;
-  color: black;
-  font-family: Algerian;
-}
-
-.mat-button-vehicle {
   background-color: darkgreen;
   color: white;
   font-family: Algerian;
+  width: 180px;
+  min-width: initial;
+}
+
+.mat-button-vehicle {
+  background-color: silver;
+  color: black;
+  font-family: Algerian;
+  width: 180px;
+  min-width: initial;
 }
 
 .mat-button-orderworkshop {
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   font-family: Algerian;
+  width: 180px;
+  min-width: initial;
 }
 
 .mat-button-workshop-state {
-  background-color: coral;
-  color: black;
+  background-color: mediumblue;
+  color: white;
   font-family: Algerian;
+  width: 180px;
+  min-width: initial;
 }

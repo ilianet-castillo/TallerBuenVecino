@@ -24,7 +24,6 @@ export class VehicleService {
       id: [''],
       markModel: ['', Validators.required],
       sheet: ['', Validators.required],
-      kms: ['', Validators.required],
       color: ['', Validators.required],
       comments: ['', Validators.required],
       client: ['', Validators.required]

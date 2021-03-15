@@ -4,7 +4,6 @@ import {TypeModel} from '../../type/type.model';
 import {ContactModel} from '../../contact/contact.model';
 import {ClientModel} from '../../client/client.model';
 import {VehicleModel} from '../../vehicle/vehicle.model';
-import {CoinModel} from '../../coin/coin.model';
 import {EmployeeModel} from '../../employee/employee.model';
 import {InvoiceService} from '../invoice.service';
 
@@ -20,7 +19,6 @@ export class AddInvoiceComponent implements OnInit {
   contacts: ContactModel[];
   clients: ClientModel[];
   vehicles: VehicleModel[];
-  coins: CoinModel[];
   employees: EmployeeModel[];
 
   constructor(private invoiceService: InvoiceService) {
@@ -34,10 +32,6 @@ export class AddInvoiceComponent implements OnInit {
 
     this.invoiceService.getClient().toPromise().then(value => {
       this.clients = (value as ClientModel[]).sort((a, b) => a.enterpriseName > b.enterpriseName ? 1 : -1);
-    }).catch(reason => alert(reason));
-
-    this.invoiceService.getCoin().toPromise().then(value => {
-      this.coins = (value as CoinModel[]).sort((a, b) => a.acronym > b.acronym ? 1 : -1);
     }).catch(reason => alert(reason));
 
     this.invoiceService.getEmployee().toPromise().then(value => {

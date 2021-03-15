@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 import {TypeService} from '../type/type.service';
 import {ContactService} from '../contact/contact.service';
 import {ClientService} from '../client/client.service';
-import {CoinService} from '../coin/coin.service';
 import {EmployeeService} from '../employee/employee.service';
 import {Observable} from 'rxjs';
 import {InvoiceModel} from './invoice.model';
@@ -24,7 +23,6 @@ export class InvoiceService {
               private typeService: TypeService,
               private contactService: ContactService,
               private clientService: ClientService,
-              private coinService: CoinService,
               private employeeService: EmployeeService) {
   }
 
@@ -41,7 +39,6 @@ export class InvoiceService {
       activityReferenceOt: ['', Validators.required],
       activityNuReferenceOt: ['', Validators.required],
       activityDate: ['', Validators.required],
-      activityCoin: ['', Validators.required],
       descriptions: [''],
       employeeInvoice: ['', Validators.required],
       employeeReceive: ['', Validators.required],
@@ -135,10 +132,6 @@ export class InvoiceService {
 
   getClient(): Observable<any> {
     return this.clientService.requestList();
-  }
-
-  getCoin(): Observable<any> {
-    return this.coinService.requestList();
   }
 
   getEmployee(): Observable<any> {

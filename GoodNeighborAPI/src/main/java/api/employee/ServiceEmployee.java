@@ -29,7 +29,6 @@ public class ServiceEmployee {
             record.setIdentityNumber(employee.getIdentityNumber());
             record.setEmail(employee.getEmail());
             record.setAddress(employee.getAddress());
-            record.setProvince(employee.getProvince());
             record.setPosition(employee.getPosition());
             return save(record);
         });

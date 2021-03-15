@@ -1,7 +1,6 @@
 package api.invoice;
 
 import api.client.EntityClient;
-import api.coin.EntityCoin;
 import api.contact.EntityContact;
 import api.description.EntityDescription;
 import api.employee.EntityEmployee;
@@ -61,10 +60,6 @@ public class EntityInvoice {
 
     @Column(nullable = false)
     private Date activityDate;
-
-    @ManyToOne
-    @JoinColumn(name = "coin_id", nullable = false)
-    private EntityCoin activityCoin;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoice")
     private List<EntityDescription> descriptions;

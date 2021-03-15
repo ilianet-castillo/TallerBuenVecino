@@ -9,7 +9,7 @@ import {VehicleService} from '../vehicle.service';
 })
 export class ListVehicleComponent implements OnInit {
 
-  displayedColumns: string[] = ['action', 'markModel', 'sheet', 'kms', 'color', 'comments'];
+  displayedColumns: string[] = ['action', 'markModel', 'sheet', 'color', 'comments'];
   vehicles: VehicleModel[];
 
   constructor(private vehicleService: VehicleService) {

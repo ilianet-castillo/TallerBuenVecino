@@ -55,7 +55,6 @@ public class ServiceInvoice {
             record.setActivityReferenceOt(invoice.getActivityReferenceOt());
             record.setActivityNuReferenceOt(invoice.getActivityNuReferenceOt());
             record.setActivityDate(invoice.getActivityDate());
-            record.setActivityCoin(invoice.getActivityCoin());
             record.setEmployeeInvoice(invoice.getEmployeeInvoice());
             record.setEmployeeReceive(invoice.getEmployeeReceive());
             record.setDate(invoice.getDate());
@@ -295,7 +294,7 @@ public class ServiceInvoice {
             cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(invoice.getActivityCoin().getAcronym(), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell = new PdfPCell(new Phrase("CUP", FontFactory.getFont(FontFactory.TIMES, 9)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);
             document.add(table);

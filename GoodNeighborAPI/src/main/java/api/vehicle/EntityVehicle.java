@@ -27,9 +27,6 @@ public class EntityVehicle {
     private String sheet;
 
     @Column(nullable = false)
-    private int kms;
-
-    @Column(nullable = false)
     private String color;
 
     @Column(nullable = false)

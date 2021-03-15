@@ -25,18 +25,10 @@ import {ListTypeComponent} from './type/list-type/list-type.component';
 import {AddTypeComponent} from './type/add-type/add-type.component';
 import {ShowTypeComponent} from './type/show-type/show-type.component';
 import {EditTypeComponent} from './type/edit-type/edit-type.component';
-import {ListCoinComponent} from './coin/list-coin/list-coin.component';
-import {AddCoinComponent} from './coin/add-coin/add-coin.component';
-import {ShowCoinComponent} from './coin/show-coin/show-coin.component';
-import {EditCoinComponent} from './coin/edit-coin/edit-coin.component';
 import {ListPositionComponent} from './position/list-position/list-position.component';
 import {AddPositionComponent} from './position/add-position/add-position.component';
 import {ShowPositionComponent} from './position/show-position/show-position.component';
 import {EditPositionComponent} from './position/edit-position/edit-position.component';
-import {ListProvinceComponent} from './province/list-province/list-province.component';
-import {AddProvinceComponent} from './province/add-province/add-province.component';
-import {ShowProvinceComponent} from './province/show-province/show-province.component';
-import {EditProvinceComponent} from './province/edit-province/edit-province.component';
 import {ShowEmployeeComponent} from './employee/show-employee/show-employee.component';
 import {EditEmployeeComponent} from './employee/edit-employee/edit-employee.component';
 import {ListClientComponent} from './client/list-client/list-client.component';
@@ -85,18 +77,10 @@ import {MatListModule} from '@angular/material/list';
     AddTypeComponent,
     ShowTypeComponent,
     EditTypeComponent,
-    ListCoinComponent,
-    AddCoinComponent,
-    ShowCoinComponent,
-    EditCoinComponent,
     ListPositionComponent,
     AddPositionComponent,
     ShowPositionComponent,
     EditPositionComponent,
-    ListProvinceComponent,
-    AddProvinceComponent,
-    ShowProvinceComponent,
-    EditProvinceComponent,
     ShowEmployeeComponent,
     EditEmployeeComponent,
     ListClientComponent,

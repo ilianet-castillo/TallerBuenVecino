@@ -26,7 +26,6 @@ public class ServiceVehicle {
         return getForId(id).map(record -> {
             record.setMarkModel(vehicle.getMarkModel());
             record.setSheet(vehicle.getSheet());
-            record.setKms(vehicle.getKms());
             record.setColor(vehicle.getColor());
             record.setComments(vehicle.getComments());
             record.setClient(vehicle.getClient());

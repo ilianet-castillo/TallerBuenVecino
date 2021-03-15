@@ -39,16 +39,6 @@
       <div class="container">
         <div class="fixed">
           <mat-form-field>
-            <mat-label>En la provincia:</mat-label>
-            <select matNativeControl formControlName="province" required>
-              <option *ngFor="let province of provinces" [ngValue]="province" [selected]="isProvinceSelect(province)">
-                {{province.name}}
-              </option>
-            </select>
-          </mat-form-field>
-        </div>
-        <div class="fixed">
-          <mat-form-field>
             <mat-label>Del cargo:</mat-label>
             <select matNativeControl formControlName="position" required>
               <option *ngFor="let position of positions" [ngValue]="position" [selected]="isPositionSelect(position)">

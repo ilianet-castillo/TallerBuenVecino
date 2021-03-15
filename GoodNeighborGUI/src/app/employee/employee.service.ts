@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {EmployeeModel} from './employee.model';
 import {PositionService} from '../position/position.service';
-import {ProvinceService} from '../province/province.service';
 
 
 @Injectable({
@@ -18,7 +17,6 @@ export class EmployeeService {
   constructor(private apiService: ApiService,
               private formBuilder: FormBuilder,
               private router: Router,
-              private provinceService: ProvinceService,
               private positionService: PositionService) {
   }
 
@@ -31,7 +29,6 @@ export class EmployeeService {
       identityNumber: ['', Validators.required],
       email: ['', Validators.required],
       address: ['', Validators.required],
-      province: ['', Validators.required],
       position: ['', Validators.required],
       orderWorkshops: ['']
     });
@@ -106,10 +103,6 @@ export class EmployeeService {
 
   getPosition(): Observable<any> {
     return this.positionService.requestList();
-  }
-
-  getProvince(): Observable<any> {
-    return this.provinceService.requestList();
   }
 
 }

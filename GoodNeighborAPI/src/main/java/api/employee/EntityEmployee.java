@@ -2,7 +2,6 @@ package api.employee;
 
 import api.orderworkshop.EntityOrderWorkshop;
 import api.position.EntityPosition;
-import api.province.EntityProvince;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
@@ -35,10 +34,6 @@ public class EntityEmployee {
     private String email;
 
     private String address;
-
-    @ManyToOne
-    @JoinColumn(name = "province_id", nullable = false)
-    private EntityProvince province;
 
     @ManyToOne
     @JoinColumn(name = "position_id", nullable = false)

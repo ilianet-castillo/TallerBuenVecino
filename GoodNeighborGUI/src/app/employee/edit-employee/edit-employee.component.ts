@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {ProvinceModel} from '../../province/province.model';
 import {EmployeeService} from '../employee.service';
 import {PositionModel} from '../../position/position.model';
 import {EmployeeModel} from '../employee.model';
@@ -13,14 +12,9 @@ import {EmployeeModel} from '../employee.model';
 export class EditEmployeeComponent implements OnInit {
 
   editForm: FormGroup;
-  provinces: ProvinceModel[];
   positions: PositionModel[];
 
   constructor(private employeeService: EmployeeService) {
-    this.employeeService.getProvince().toPromise().then(value => {
-      this.provinces = (value as ProvinceModel[]).sort((a, b) => a.name > b.name ? 1 : -1);
-    }).catch(reason => alert(reason));
-
     this.employeeService.getPosition().toPromise().then(value => {
       this.positions = (value as PositionModel[]).sort((a, b) => a.name > b.name ? 1 : -1);
     }).catch(reason => alert(reason));
@@ -39,10 +33,6 @@ export class EditEmployeeComponent implements OnInit {
 
   cancel(): void {
     this.employeeService.show(this.editForm.value);
-  }
-
-  isProvinceSelect(province: ProvinceModel): boolean {
-    return (this.editForm.value as EmployeeModel).province.id === province.id;
   }
 
   isPositionSelect(position: PositionModel): boolean {

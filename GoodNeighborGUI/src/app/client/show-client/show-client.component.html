@@ -27,7 +27,8 @@
     </mat-form-field>
     <mat-list role="list">
       <div mat-card-subtitle>Veh&iacute;culos:</div>
-      <mat-list-item *ngFor="let vehicle of client?.vehicles" role="listitem">{{vehicle.sheet}}</mat-list-item>
+      <mat-list-item *ngFor="let vehicle of client?.vehicles" role="listitem">{{vehicle.markModel}} {{vehicle.color}}
+      </mat-list-item>
     </mat-list>
     <mat-card-actions>
       <button mat-icon-button title="Editar" (click)="edit()">

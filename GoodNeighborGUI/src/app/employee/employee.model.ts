@@ -1,4 +1,3 @@
-import {ProvinceModel} from '../province/province.model';
 import {PositionModel} from '../position/position.model';
 import {OrderWorkshopModel} from '../order-workshop/order-workshop.model';
 
@@ -11,7 +10,6 @@ export class EmployeeModel {
   identityNumber: number;
   email: string;
   address: string;
-  province: ProvinceModel;
   position: PositionModel;
   orderWorkshops: OrderWorkshopModel[];
 
