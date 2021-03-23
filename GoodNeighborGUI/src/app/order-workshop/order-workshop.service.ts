@@ -50,7 +50,6 @@ export class OrderWorkshopService {
     }
 
     if (confirm('¿Desea adicionar la orden del taller ' + (addForm.value as OrderWorkshopModel).id + '?')) {
-      (addForm.value as OrderWorkshopModel).dateEntrance = new Date();
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
         alert('Orden del taller' + (value as OrderWorkshopModel).id + ' adicionada satisfactoriamente');
         this.list();

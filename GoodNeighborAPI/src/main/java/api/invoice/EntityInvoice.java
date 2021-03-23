@@ -38,9 +38,6 @@ public class EntityInvoice {
     @JoinColumn(name = "contact_id", nullable = false)
     private EntityContact contact;
 
-    @Column(nullable = false)
-    private String activityName;
-
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     private EntityClient activityClient;
@@ -49,14 +46,9 @@ public class EntityInvoice {
     @JoinColumn(name = "vehicle_id", nullable = false)
     private EntityVehicle activityVehicle;
 
-    @Column(nullable = false)
-    private long activityNuInvoice;
-
+    // TODO one to one
     @Column(nullable = false)
     private long activityReferenceOt;
-
-    @Column(nullable = false)
-    private long activityNuReferenceOt;
 
     @Column(nullable = false)
     private Date activityDate;
@@ -67,12 +59,5 @@ public class EntityInvoice {
     @ManyToOne
     @JoinColumn(name = "employee_invoice_id", nullable = false)
     private EntityEmployee employeeInvoice;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_receive_id", nullable = false)
-    private EntityEmployee employeeReceive;
-
-    @Column(nullable = false)
-    private Date date;
 
 }

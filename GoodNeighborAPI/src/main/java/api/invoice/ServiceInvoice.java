@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,7 @@ public class ServiceInvoice {
     private RepositoryInvoice repositoryInvoice;
 
     public EntityInvoice save(EntityInvoice invoice) {
+        invoice.setActivityDate(new Date());
         return repositoryInvoice.save(invoice);
     }
 
@@ -47,16 +49,10 @@ public class ServiceInvoice {
         return getForId(id).map(record -> {
             record.setInvoiceType(invoice.getInvoiceType());
             record.setContact(invoice.getContact());
-            record.setActivityName(invoice.getActivityName());
             record.setActivityClient(invoice.getActivityClient());
             record.setActivityVehicle(invoice.getActivityVehicle());
-            record.setActivityNuInvoice(invoice.getActivityNuInvoice());
             record.setActivityReferenceOt(invoice.getActivityReferenceOt());
-            record.setActivityNuReferenceOt(invoice.getActivityNuReferenceOt());
-            record.setActivityDate(invoice.getActivityDate());
             record.setEmployeeInvoice(invoice.getEmployeeInvoice());
-            record.setEmployeeReceive(invoice.getEmployeeReceive());
-            record.setDate(invoice.getDate());
             return save(record);
         });
     }
@@ -191,7 +187,7 @@ public class ServiceInvoice {
             element = new Paragraph();
             element.setAlignment(Element.ALIGN_CENTER);
             element.add(new Phrase("Nombre de la Actividad: ", FontFactory.getFont(FontFactory.TIMES_BOLD, 11)));
-            element.add(new Phrase(invoice.getActivityName(), FontFactory.getFont(FontFactory.TIMES, 11)));
+            element.add(new Phrase("Reparación de Equipos Mecánicos y de Combustión", FontFactory.getFont(FontFactory.TIMES, 11)));
             document.add(element);
 
             element = new Paragraph();
@@ -229,7 +225,7 @@ public class ServiceInvoice {
             cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getActivityNuInvoice()), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getId()), FontFactory.getFont(FontFactory.TIMES, 9)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);
 
@@ -261,7 +257,7 @@ public class ServiceInvoice {
             cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getActivityNuReferenceOt()), FontFactory.getFont(FontFactory.TIMES, 9)));
+            cell = new PdfPCell(new Phrase(invoice.getId() + " - " + invoice.getActivityReferenceOt(), FontFactory.getFont(FontFactory.TIMES, 9)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);
 
@@ -378,7 +374,7 @@ public class ServiceInvoice {
             cell.setBorder(0);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(invoice.getEmployeeReceive().getName(), FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell = new PdfPCell(new Phrase("______________________________", FontFactory.getFont(FontFactory.TIMES, 11)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             cell.setBorder(0);
             table.addCell(cell);
@@ -398,7 +394,7 @@ public class ServiceInvoice {
             cell.setBorder(0);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(invoice.getEmployeeReceive().getPosition().getName(), FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell = new PdfPCell(new Phrase("______________________________", FontFactory.getFont(FontFactory.TIMES, 11)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             cell.setBorder(0);
             table.addCell(cell);
@@ -408,7 +404,7 @@ public class ServiceInvoice {
             cell.setBorder(0);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getDate()), FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell = new PdfPCell(new Phrase(String.valueOf(new Date()), FontFactory.getFont(FontFactory.TIMES, 11)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             cell.setBorder(0);
             table.addCell(cell);
@@ -418,7 +414,7 @@ public class ServiceInvoice {
             cell.setBorder(0);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(invoice.getDate()), FontFactory.getFont(FontFactory.TIMES, 11)));
+            cell = new PdfPCell(new Phrase("______________________________", FontFactory.getFont(FontFactory.TIMES, 11)));
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             cell.setBorder(0);
             table.addCell(cell);

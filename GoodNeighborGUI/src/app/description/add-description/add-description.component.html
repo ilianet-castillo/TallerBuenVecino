@@ -19,7 +19,7 @@
           <mat-form-field>
             <mat-label>En la factura:</mat-label>
             <select matNativeControl formControlName="invoice" required>
-              <option *ngFor="let invoice of invoices" [ngValue]="invoice">{{invoice.activityNuInvoice}}</option>
+              <option *ngFor="let invoice of invoices" [ngValue]="invoice">{{invoice.id}}</option>
             </select>
           </mat-form-field>
         </div>

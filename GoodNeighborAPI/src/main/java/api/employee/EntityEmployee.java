@@ -27,7 +27,7 @@ public class EntityEmployee {
 
     private String name;
 
-    private int phone;
+    private long phone;
 
     private long identityNumber;
 

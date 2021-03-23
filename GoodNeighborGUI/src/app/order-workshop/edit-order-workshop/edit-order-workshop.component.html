@@ -7,16 +7,6 @@
       <div class="container">
         <div class="fixed">
           <mat-form-field>
-            <mat-label>Fecha de entrada:</mat-label>
-            <input matInput [matDatepicker]="pickerDateEntrance" [max]="getDate()" formControlName="dateEntrance"
-                   readonly
-                   required>
-            <mat-datepicker-toggle matSuffix [for]="pickerDateEntrance"></mat-datepicker-toggle>
-            <mat-datepicker #pickerDateEntrance></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="fixed">
-          <mat-form-field>
             <mat-label>Fecha de salida:</mat-label>
             <input matInput [matDatepicker]="pickerDateExit" [min]="getDate()" formControlName="dateExit" readonly>
             <mat-datepicker-toggle matSuffix [for]="pickerDateExit"></mat-datepicker-toggle>

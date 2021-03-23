@@ -44,15 +44,12 @@ export class EditInvoiceComponent implements OnInit {
     this.editForm = this.invoiceService.getForm();
     this.invoiceService.requestGet().toPromise().then(value => {
       this.editForm.setValue(value);
+      this.vehicles = (this.editForm.value as InvoiceModel).activityClient.vehicles;
     }).catch(reason => alert(reason));
   }
 
   onSubmit() {
     this.invoiceService.requestUpdate(this.editForm);
-  }
-
-  getDate(): Date {
-    return this.invoiceService.getDate();
   }
 
   getVehicles(client: ClientModel) {
@@ -81,10 +78,6 @@ export class EditInvoiceComponent implements OnInit {
 
   isEmployeeInvoiceSelect(employee: EmployeeModel): boolean {
     return (this.editForm.value as InvoiceModel).employeeInvoice.id === employee.id;
-  }
-
-  isEmployeeReceiveSelect(employee: EmployeeModel): boolean {
-    return (this.editForm.value as InvoiceModel).employeeReceive.id === employee.id;
   }
 
 }

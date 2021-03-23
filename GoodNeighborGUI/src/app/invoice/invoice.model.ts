@@ -11,16 +11,11 @@ export class InvoiceModel {
   id: number;
   invoiceType: TypeModel;
   contact: ContactModel;
-  activityName: string;
   activityClient: ClientModel;
   activityVehicle: VehicleModel;
-  activityNuInvoice: number;
   activityReferenceOt: number;
-  activityNuReferenceOt: number;
   activityDate: Date;
   descriptions: DescriptionModel[];
   employeeInvoice: EmployeeModel;
-  employeeReceive: EmployeeModel;
-  date: Date;
 
 }

@@ -32,17 +32,12 @@ export class InvoiceService {
       id: [''],
       invoiceType: ['', Validators.required],
       contact: ['', Validators.required],
-      activityName: ['', Validators.required],
       activityClient: ['', Validators.required],
       activityVehicle: ['', Validators.required],
-      activityNuInvoice: ['', Validators.required],
       activityReferenceOt: ['', Validators.required],
-      activityNuReferenceOt: ['', Validators.required],
-      activityDate: ['', Validators.required],
+      activityDate: [''],
       descriptions: [''],
-      employeeInvoice: ['', Validators.required],
-      employeeReceive: ['', Validators.required],
-      date: ['', Validators.required]
+      employeeInvoice: ['', Validators.required]
     });
   }
 
@@ -57,11 +52,11 @@ export class InvoiceService {
       return;
     }
 
-    if (confirm('¿Desea adicionar la factura ' + (addForm.value as InvoiceModel).activityNuInvoice + '?')) {
+    if (confirm('¿Desea adicionar la factura ' + (addForm.value as InvoiceModel).id + '?')) {
       (addForm.value as InvoiceModel).jsonId = Math.random();
       (addForm.value as InvoiceModel).descriptions = [];
       this.apiService.sendPostRequest(this.url, addForm.value).toPromise().then(value => {
-        alert('Factura ' + (value as InvoiceModel).activityNuInvoice + ' adicionada satisfactoriamente');
+        alert('Factura ' + (value as InvoiceModel).id + ' adicionada satisfactoriamente');
         this.list();
       }).catch(reason => alert(reason));
 
@@ -85,9 +80,9 @@ export class InvoiceService {
       return;
     }
 
-    if (confirm('¿Desea actualizar la factura ' + (editForm.value as InvoiceModel).activityNuInvoice + '?')) {
+    if (confirm('¿Desea actualizar la factura ' + (editForm.value as InvoiceModel).id + '?')) {
       this.apiService.sendPutRequest(this.url, editForm.value).toPromise().then(value => {
-        alert('Factura ' + (value as InvoiceModel).activityNuInvoice + ' actualizada satisfactoriamente');
+        alert('Factura ' + (value as InvoiceModel).id + ' actualizada satisfactoriamente');
         this.show(value);
       }).catch(reason => alert(reason));
     }
@@ -136,10 +131,6 @@ export class InvoiceService {
 
   getEmployee(): Observable<any> {
     return this.employeeService.requestList();
-  }
-
-  getDate(): Date {
-    return new Date();
   }
 
 }

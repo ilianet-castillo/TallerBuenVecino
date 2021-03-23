@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public class ServiceOrderWorkshop {
     private RepositoryOrderWorkshop repositoryOrderWorkshop;
 
     public EntityOrderWorkshop save(EntityOrderWorkshop orderWorkshop) {
+        orderWorkshop.setDateEntrance(new Date());
         return repositoryOrderWorkshop.save(orderWorkshop);
     }
 
@@ -25,7 +27,6 @@ public class ServiceOrderWorkshop {
 
     public Optional<EntityOrderWorkshop> update(int id, EntityOrderWorkshop orderWorkshop) {
         return getForId(id).map(record -> {
-            record.setDateEntrance(orderWorkshop.getDateEntrance());
             record.setDateExit(orderWorkshop.getDateExit());
             record.setOrderWorkshopState(orderWorkshop.getOrderWorkshopState());
             record.setOrderWorkshopType(orderWorkshop.getOrderWorkshopType());

@@ -47,10 +47,6 @@ export class AddInvoiceComponent implements OnInit {
     this.invoiceService.requestAdd(this.addForm);
   }
 
-  getDate(): Date {
-    return this.invoiceService.getDate();
-  }
-
   getVehicles(client: ClientModel) {
     this.vehicles = client.vehicles;
   }

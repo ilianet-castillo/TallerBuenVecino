@@ -20,10 +20,6 @@
         </select>
       </mat-form-field>
       <br>
-      <mat-form-field>
-        <mat-label>Nombre de la actividad:</mat-label>
-        <input matInput type="text" formControlName="activityName" autocomplete="off" required>
-      </mat-form-field>
       <div class="container">
         <div class="fixed">
           <mat-form-field>
@@ -50,29 +46,8 @@
       <div class="container">
         <div class="fixed">
           <mat-form-field>
-            <mat-label>N&uacute;mero de Factura:</mat-label>
-            <input matInput type="text" formControlName="activityNuInvoice" autocomplete="off" required>
-          </mat-form-field>
-        </div>
-        <div class="fixed">
-          <mat-form-field>
-            <mat-label>Referencia OT No:</mat-label>
-            <input matInput type="text" formControlName="activityNuReferenceOt" autocomplete="off" required>
-          </mat-form-field>
-        </div>
-        <div class="fixed">
-          <mat-form-field>
             <mat-label>No. Factura OT No:</mat-label>
             <input matInput type="text" formControlName="activityReferenceOt" autocomplete="off" required>
-          </mat-form-field>
-        </div>
-        <div class="fixed">
-
-          <mat-form-field>
-            <mat-label>Actividad Fecha:</mat-label>
-            <input matInput [matDatepicker]="picker" [max]="getDate()" formControlName="activityDate" readonly required>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
       </div>
@@ -87,24 +62,7 @@
             </select>
           </mat-form-field>
         </div>
-        <div class="fixed">
-          <mat-form-field>
-            <mat-label>Empleado que recibe:</mat-label>
-            <select matNativeControl formControlName="employeeReceive" required>
-              <option *ngFor="let employee of employees" [ngValue]="employee"
-                      [selected]="isEmployeeReceiveSelect(employee)">{{employee.name}}
-              </option>
-            </select>
-          </mat-form-field>
-        </div>
       </div>
-      <mat-form-field>
-        <mat-label>Fecha:</mat-label>
-        <input matInput [matDatepicker]="datePicker" [max]="getDate()" formControlName="date" readonly required>
-        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
-        <mat-datepicker #datePicker></mat-datepicker>
-      </mat-form-field>
-      <br>
       <mat-card-actions>
         <button mat-raised-button title="Actualizar">
           <mat-icon svgIcon="update"></mat-icon>
